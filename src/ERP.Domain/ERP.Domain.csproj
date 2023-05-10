@@ -7,7 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Entities\" />
+    <Folder Include="DTOs\Common\" />
+    <Folder Include="DTOs\Exceptions\" />
+    <Folder Include="Entities\Common\" />
+    <Folder Include="Enums\" />
+    <Folder Include="Events\Common\" />
+    <Folder Include="Exceptions\" />
+    <Folder Include="Interfaces\Repositories\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0-preview.3.23174.2" />
   </ItemGroup>
 
 </Project>
