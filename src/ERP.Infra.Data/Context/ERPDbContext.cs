@@ -27,11 +27,13 @@ public class ERPDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        var mutableProperties = modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetProperties().Where(p => p.Name == "Status"));
+        //var mutableProperties = modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetProperties().Where(p => p.Name == "Status"));
                  
         #region Employe 
         new EMPEmployeeEntityTypeConfiguration().Configure(modelBuilder.Entity<EMPEmployee>());
         #endregion
+        modelBuilder.Entity<EMPEmployee>().Property(x => x.Id).UseHiLo("EMPEmployee_Hilo");
+
         //foreach (var mutableEntityType in modelBuilder.Model.GetEntityTypes())
         //{
         //    mutableEntityType.SetQueryFilter(filterExpr);

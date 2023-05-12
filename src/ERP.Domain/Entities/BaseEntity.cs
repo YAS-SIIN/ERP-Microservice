@@ -43,8 +43,7 @@ public abstract class BaseEntityConfiguration<TEntity, TKey> : IEntityTypeConfig
 {
     public virtual void Configure(EntityTypeBuilder<TEntity> builder)
     {
-        builder.HasKey(x => x.Id);
-        builder.Property(be => be.Status).IsRequired();
+        builder.Property(be => be.Status).IsRequired();            
         builder.Property(be => be.CreateDateTime).IsRequired();
         builder.Property(be => be.UpdateDateTime).IsRequired();
         builder.Property(be => be.Description).HasMaxLength(250);
