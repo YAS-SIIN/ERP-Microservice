@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ERP.Domain", "src\ERP.Domai
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ERP.Infra.Data", "src\ERP.Infra.Data\ERP.Infra.Data.csproj", "{E3CC866C-7823-4ECC-B496-789C0FD0083B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERP.IoC", "ERP.IoC\ERP.IoC.csproj", "{3396BA78-9C49-4499-BC0C-3FE78DEC8840}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERP.IoC", "src\ERP.IoC\ERP.IoC.csproj", "{3396BA78-9C49-4499-BC0C-3FE78DEC8840}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
