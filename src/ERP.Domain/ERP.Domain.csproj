@@ -7,7 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Entities\" />
+    <Folder Include="DTOs\Common\" />
+    <Folder Include="DTOs\Exceptions\" />
+    <Folder Include="Events\Common\" />
+    <Folder Include="Exceptions\" />
   </ItemGroup>
 
   <ItemGroup>

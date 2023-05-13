@@ -5,13 +5,13 @@ using System.Linq.Expressions;
 using static ERP.Common.Enums.TypeEnum;
 using System.ComponentModel.DataAnnotations;
 
-namespace ERP.Domain.Entities;
-         
+namespace ERP.Domain.Entities.Common;
+
 /// <summary>
 /// Base Entity Class Which is base of the every entity. 
 /// </summary>
 /// <typeparam name="TKey"></typeparam>
-public abstract class BaseEntity<TKey> 
+public abstract class BaseEntity<TKey>
 {
     [Key]
     public TKey? Id { get; set; }
@@ -24,7 +24,7 @@ public abstract class BaseEntity<TKey>
 
     [Required]
     public DateTime UpdateDateTime { get; set; }
-         
+
     [StringLength(250)]
     public string? Description { get; set; }
 }
@@ -42,8 +42,8 @@ public abstract class BaseEntity<TKey>
 //        builder.Property(be => be.CreateDateTime).IsRequired();
 //        builder.Property(be => be.UpdateDateTime).IsRequired();
 //        builder.Property(be => be.Description).HasMaxLength(250);
-                               
+
 //        builder.HasQueryFilter(x=> x.Status != (short)BaseStatus.Deleted);
-   
+
 //    }
 //}
