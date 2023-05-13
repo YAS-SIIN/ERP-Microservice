@@ -1,6 +1,6 @@
 ﻿
 
-using ERP.Entities.GenericRepository;
+using ERP.Domain.Interfaces.Repositories;
 using ERP.Infra.Data.Context;
 
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace ERP.Repositories;
+namespace ERP.Infra.Data.Repositories;
 
 public class GenericRepository<T> : IGenericRepository<T> where T : class
 {
@@ -22,7 +22,6 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         _context = context;
         _dbSet = context.Set<T>();
-    
     }
 
     public bool ExistData()

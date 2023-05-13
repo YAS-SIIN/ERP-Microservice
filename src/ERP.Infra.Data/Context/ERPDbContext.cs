@@ -22,9 +22,7 @@ public class ERPDbContext : DbContext
     #region Employe    
     public DbSet<EMPEmployee> EMPEmployees { get; set; }
     #endregion
-
-
-
+               
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         //var mutableProperties = modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetProperties().Where(p => p.Name == "Status"));

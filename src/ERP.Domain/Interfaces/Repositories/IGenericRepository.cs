@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace ERP.Entities.GenericRepository;
+namespace ERP.Domain.Interfaces.Repositories;
 
 public interface IGenericRepository<T> where T : class
 {
