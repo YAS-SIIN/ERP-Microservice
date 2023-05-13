@@ -1,16 +1,5 @@
-﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection.Metadata;
-using System.Threading;
-using System.Threading.Tasks;
-
-using ERP.Domain.Entities;
-using ERP.Domain.Entities.Employees;
-
+﻿using ERP.Domain.Entities.Employees;
 using Microsoft.EntityFrameworkCore;
-
-using static ERP.Common.Enums.TypeEnum;
 
 namespace ERP.Infra.Data.Context;
 

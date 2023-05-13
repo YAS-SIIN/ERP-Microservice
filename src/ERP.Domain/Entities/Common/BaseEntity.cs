@@ -1,8 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Emit;
-using System.Linq.Expressions;
-using static ERP.Common.Enums.TypeEnum;
+using System.Linq.Expressions;            
 using System.ComponentModel.DataAnnotations;
 
 namespace ERP.Domain.Entities.Common;

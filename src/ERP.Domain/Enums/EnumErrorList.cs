@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ERP.Common.Enums
 {
-    public static class ErrorList
+    public static class EnumErrorList
     {
 
         [Display(Name = "اطلاعاتی یافت نشد.")]

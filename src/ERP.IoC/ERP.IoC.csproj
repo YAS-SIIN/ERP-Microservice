@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ERP.Infra.Data\ERP.Infra.Data.csproj" />
     <ProjectReference Include="..\src\ERP.Infra.Data\ERP.Infra.Data.csproj" />
   </ItemGroup>
 
