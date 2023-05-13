@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection.Metadata;
 using System.Threading;
 using System.Threading.Tasks;
 
+using ERP.Domain.Entities;
 using ERP.Domain.Entities.Employees;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace SampleLibrary.Infra.Data.Context;
+using static ERP.Common.Enums.TypeEnum;
+
+namespace ERP.Infra.Data.Context;
 
 public class ERPDbContext : DbContext
 {
@@ -23,13 +27,19 @@ public class ERPDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        var mutableProperties = modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetProperties().Where(p => p.ClrType == typeof(string)));
-
+        //var mutableProperties = modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetProperties().Where(p => p.Name == "Status"));
+                 
         #region Employe 
         new EMPEmployeeEntityTypeConfiguration().Configure(modelBuilder.Entity<EMPEmployee>());
         #endregion
+        modelBuilder.Entity<EMPEmployee>().Property(x => x.Id).UseHiLo("EMPEmployee_Hilo");
+
+        //foreach (var mutableEntityType in modelBuilder.Model.GetEntityTypes())
+        //{
+        //    mutableEntityType.SetQueryFilter(filterExpr);
+        //}
         //foreach (var property in mutableProperties)
-        //    property.Relational().ColumnType = "varchar(100)";
+        //    property. = "varchar(100)";
 
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ERPDbContext).Assembly); base.OnModelCreating(modelBuilder);
     }
@@ -41,14 +51,14 @@ public class ERPDbContext : DbContext
         {
             if (entry.State == EntityState.Added)
             {
-                entry.Property("Created").CurrentValue = DateTime.Now;
+                entry.Property("CreateDateTime").CurrentValue = DateTime.Now;
                 continue;
             }
 
             if (entry.State == EntityState.Modified)
             {
-                entry.Property("Created").IsModified = false;
-                entry.Property("Updated").CurrentValue = DateTime.Now;
+                entry.Property("CreateDateTime").IsModified = false;
+                entry.Property("UpdateDateTime").CurrentValue = DateTime.Now;
             }
         }
 
