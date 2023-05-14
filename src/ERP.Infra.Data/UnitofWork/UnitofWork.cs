@@ -15,52 +15,57 @@ namespace ERP.Infra.Data.UnitOfWork;
 public class UnitOfWork : IUnitOfWork
 {
     private readonly CoreDBContextInjection _context;
-    private bool disposed = false;
-    private readonly EnumDBContextType _dbContextType;
+    //private bool disposed = false;                       
 
-    public UnitOfWork(CoreDBContextInjection context, EnumDBContextType dbContextType)
+    public UnitOfWork(CoreDBContextInjection context)
     {
 
       // Database.SetInitializer<MyDataBase>(null);
         if (context == null)
             throw new ArgumentException("DB context is null!");
-        _context = context;
-        _dbContextType = dbContextType;
+        _context = context;              
     }
 
-    public IGenericRepository<T> GetRepository<T>() where T : class
-    {
-        return new GenericRepository<T>(_context, _dbContextType);
+
+    /// <summary>
+    /// Generate Repository of Entities
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="dbContextType"></param>
+    /// <returns></returns>
+    public IGenericRepository<T> GetRepository<T>(EnumDBContextType dbContextType) where T : class
+    {                                     
+        return new GenericRepository<T>(_context, dbContextType);
     }
 
-    public virtual void Dispose(bool disposing)
-    {
-        if (!this.disposed)
-        {
-            if (disposing)
-            {
-                switch (_dbContextType)
-                {
-                    case EnumDBContextType.MAIN_ERPDBContext:
-                        _context._main_ERPDBContext.Dispose();
-                        break;
-                    case EnumDBContextType.READ_ERPDBContext:
-                         _context._read_ERPDBContext.Dispose();
-                        break;
-                    case EnumDBContextType.WRITE_ERPDBContext:
-                        _context._write_ERPDBContext.Dispose();
-                        break;
-                }                                         
-            }
-        }
-        this.disposed = true;
-    }
+    //public virtual void Dispose(bool disposing)
+    //{
+    //    if (!this.disposed)
+    //    {
+    //        if (disposing)
+    //        {
+    //            switch (_dbContextType)
+    //            {
+    //                case EnumDBContextType.MAIN_ERPDBContext:
+    //                    _context._main_ERPDBContext.Dispose();
+    //                    break;
+    //                case EnumDBContextType.READ_ERPDBContext:
+    //                     _context._read_ERPDBContext.Dispose();
+    //                    break;
+    //                case EnumDBContextType.WRITE_ERPDBContext:
+    //                    _context._write_ERPDBContext.Dispose();
+    //                    break;
+    //            }                                         
+    //        }
+    //    }
+    //    this.disposed = true;
+    //}
 
-    public void Dispose()
-    {
-        Dispose(true);
-        GC.SuppressFinalize(this);
-    }
+    //public void Dispose()
+    //{
+    //    Dispose(true);
+    //    GC.SuppressFinalize(this);
+    //}
 
 
 }

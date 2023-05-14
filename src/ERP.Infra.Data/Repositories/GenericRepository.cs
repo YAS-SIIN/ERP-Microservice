@@ -27,10 +27,10 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         {
             case EnumDBContextType.MAIN_ERPDBContext:
                 _dbSet = context._main_ERPDBContext.Set<T>();
-                break;    
+                break;
             case EnumDBContextType.READ_ERPDBContext:
                 _dbSet = context._read_ERPDBContext.Set<T>();
-                break; 
+                break;
             case EnumDBContextType.WRITE_ERPDBContext:
                 _dbSet = context._write_ERPDBContext.Set<T>();
                 break;
@@ -100,7 +100,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
 
 
     public virtual void Delete(T entity)
-    {
+    { 
         if (_context._write_ERPDBContext.Entry(entity).State == EntityState.Detached)
             _dbSet.Attach(entity);
         _dbSet.Remove(entity);
@@ -113,47 +113,75 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
 
 
     //--------------
+    #region Async Methods
 
-    public async Task<bool> ExistDataAsync()
+    public async Task<bool> ExistDataAsync(CancellationToken cancellationToken)
     {
-        return await _dbSet.AnyAsync();
+        return await _dbSet.AnyAsync(cancellationToken);
     }
-    public async Task<bool> ExistDataAsync(Expression<Func<T, bool>> predicate)
+    public async Task<bool> ExistDataAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken)
     {
-        return await _dbSet.Where(predicate).AnyAsync();
+        return await _dbSet.Where(predicate).AnyAsync(cancellationToken);
     }
 
-
-    public async Task<IQueryable<T>> GetAllAsync()
+    public async Task<IQueryable<T>> GetAllAsync(CancellationToken cancellationToken)
     {
-        var data = await _dbSet.ToListAsync();
+        var data = await _dbSet.ToListAsync(cancellationToken);
         return data.AsQueryable();
     }
-    public async Task<IQueryable<T>> GetAllAsync(Expression<Func<T, bool>> predicate)
+    public async Task<IQueryable<T>> GetAllAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken)
     {
-        var data = await _dbSet.Where(predicate).ToListAsync();
+        var data = await _dbSet.Where(predicate).ToListAsync(cancellationToken);
         return data.AsQueryable();
     }
 
-    public async Task<T> GetByIdAsync(object id)
+    public async Task<T> GetByIdAsync(object id, CancellationToken cancellationToken)
     {
-        return await _dbSet.FindAsync(id);
+        return await _dbSet.FindAsync(id, cancellationToken);
     }
 
-    public async Task<T> GetAsync(Expression<Func<T, bool>> predicate)
+    public async Task<T> GetAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken)
     {
-        return await _dbSet.Where(predicate).SingleOrDefaultAsync();
+        return await _dbSet.Where(predicate).SingleOrDefaultAsync(cancellationToken);
     }
 
-    public async virtual Task AddAsync(T entity)
+    public async virtual Task AddAsync(T entity, CancellationToken cancellationToken)
     {
-        await _dbSet.AddAsync(entity);
+        await _dbSet.AddAsync(entity, cancellationToken);
     }
 
-    public async virtual Task AddRangeAsync(List<T> entityList)
+    public async virtual Task AddRangeAsync(List<T> entityList, CancellationToken cancellationToken)
     {
-        await _dbSet.AddRangeAsync(entityList);
+        await _dbSet.AddRangeAsync(entityList, cancellationToken);
     }
 
+    #endregion
+    /// <summary>
+    /// Save and commit changes in database
+    /// </summary>
+    public void SaveChanges()
+    {
+        try
+        {
+            _context._write_ERPDBContext.SaveChanges();
+        }
+        catch
+        {
+        }
+    }
+
+    /// <summary>
+    /// Save and commit changes in database using multithread
+    /// </summary>
+    public async void SaveChangesAsync(CancellationToken cancellationToken)
+    {
+        try
+        {
+           await _context._write_ERPDBContext.SaveChangesAsync(cancellationToken);
+        }
+        catch
+        {
+        }
+    }
 
 }

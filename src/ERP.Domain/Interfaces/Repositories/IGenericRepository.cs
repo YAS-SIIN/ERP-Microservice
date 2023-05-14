@@ -24,14 +24,14 @@ public interface IGenericRepository<T> where T : class
     
     //--------
 
-    Task<bool> ExistDataAsync();
-    Task<bool> ExistDataAsync(Expression<Func<T, bool>> predicate);
-    Task<IQueryable<T>> GetAllAsync();
-    Task<IQueryable<T>> GetAllAsync(Expression<Func<T, bool>> predicate);
-    Task<T> GetByIdAsync(object id);
-    Task<T> GetAsync(Expression<Func<T, bool>> predicate);
-    Task AddAsync(T entity);
-    Task AddRangeAsync(List<T> entityList);
+    Task<bool> ExistDataAsync(CancellationToken cancellationToken);
+    Task<bool> ExistDataAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken);
+    Task<IQueryable<T>> GetAllAsync(CancellationToken cancellationToken);
+    Task<IQueryable<T>> GetAllAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken);
+    Task<T> GetByIdAsync(object id, CancellationToken cancellationToken);
+    Task<T> GetAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken);
+    Task AddAsync(T entity, CancellationToken cancellationToken);
+    Task AddRangeAsync(List<T> entityList, CancellationToken cancellationToken);
      
 
 }
