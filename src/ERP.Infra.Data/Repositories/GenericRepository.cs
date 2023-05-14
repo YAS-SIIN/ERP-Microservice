@@ -1,7 +1,9 @@
 ﻿
 
+using ERP.Domain.Enums;
 using ERP.Domain.Interfaces.Repositories;
 using ERP.Infra.Data.Context;
+using ERP.Infra.Data.CoreContext;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -15,13 +17,27 @@ namespace ERP.Infra.Data.Repositories;
 public class GenericRepository<T> : IGenericRepository<T> where T : class
 {
 
-    private readonly ERPDbContext _context;
+    private readonly CoreDBContextInjection _context;
     private readonly DbSet<T> _dbSet;
 
-    public GenericRepository(ERPDbContext context)
+    public GenericRepository(CoreDBContextInjection context, EnumDBContextType dBContextType)
     {
         _context = context;
-        _dbSet = context.Set<T>();
+        switch (dBContextType)
+        {
+            case EnumDBContextType.MAIN_ERPDBContext:
+                _dbSet = context._main_ERPDBContext.Set<T>();
+                break;    
+            case EnumDBContextType.READ_ERPDBContext:
+                _dbSet = context._read_ERPDBContext.Set<T>();
+                break; 
+            case EnumDBContextType.WRITE_ERPDBContext:
+                _dbSet = context._write_ERPDBContext.Set<T>();
+                break;
+            default:
+                _dbSet = context._main_ERPDBContext.Set<T>();
+                break;
+        }
     }
 
     public bool ExistData()
@@ -56,7 +72,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
 
     public virtual IQueryable<T> FromSqlRaw(string strQuery, object[] parametrs)
     {
-       
+
         return _dbSet.FromSqlRaw(strQuery, parametrs.ToArray());
     }
 
@@ -73,19 +89,19 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
     public virtual void Update(T entity)
     {
         _dbSet.Attach(entity);
-        _context.Entry(entity).State = EntityState.Modified;
+        _context._write_ERPDBContext.Entry(entity).State = EntityState.Modified;
     }
 
     public virtual void UpdateRange(List<T> entity)
     {
         _dbSet.AttachRange(entity);
-        _context.Entry(entity).State = EntityState.Modified;
+        _context._write_ERPDBContext.Entry(entity).State = EntityState.Modified;
     }
 
 
     public virtual void Delete(T entity)
     {
-        if (_context.Entry(entity).State == EntityState.Detached)
+        if (_context._write_ERPDBContext.Entry(entity).State == EntityState.Detached)
             _dbSet.Attach(entity);
         _dbSet.Remove(entity);
     }
@@ -115,7 +131,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
     }
     public async Task<IQueryable<T>> GetAllAsync(Expression<Func<T, bool>> predicate)
     {
-          var data = await _dbSet.Where(predicate).ToListAsync();
+        var data = await _dbSet.Where(predicate).ToListAsync();
         return data.AsQueryable();
     }
 
@@ -138,6 +154,6 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         await _dbSet.AddRangeAsync(entityList);
     }
- 
-    
+
+
 }

@@ -1,5 +1,4 @@
-﻿
-using ERP.Common;
+﻿using ERP.Common;
 using ERP.Domain.Entities.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -7,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.ComponentModel.DataAnnotations;
 
 
-namespace ERP.Domain.Entities.Employees;
+namespace ERP.Domain.Entities.ERP.Employees;
 
 public class EMPEmployee : BaseEntity<long>
 {
@@ -15,23 +14,23 @@ public class EMPEmployee : BaseEntity<long>
     public string FirstName { get; set; }
 
     public string LastName { get; set; }
-                  
+
     public int EmpoloyeeNo { get; set; } = 0;
-                    
+
     public string FatherName { get; set; }
 
     public string NationalCode { get; set; }
 
     public string IdentifyNo { get; set; }
-                 
+
     public string DateOfBirth { get; set; }
-                  
+
     public short Gender { get; set; }
-                     
+
     public string HireDate { get; set; }
 
     public string LeaveDate { get; set; } = "";
-                                
+
     public string MobileNo { get; set; }
 
     public string ImaghePath { get; set; } = "";
@@ -40,7 +39,7 @@ public class EMPEmployee : BaseEntity<long>
 public class EMPEmployeeEntityTypeConfiguration : IEntityTypeConfiguration<EMPEmployee>
 {
     public void Configure(EntityTypeBuilder<EMPEmployee> builder)
-    {                                                     
+    {
         builder.Property(b => b.FirstName).IsRequired().HasMaxLength(50);
         builder.Property(b => b.LastName).IsRequired().HasMaxLength(100);
         builder.Property(b => b.EmpoloyeeNo).IsRequired();
@@ -53,6 +52,6 @@ public class EMPEmployeeEntityTypeConfiguration : IEntityTypeConfiguration<EMPEm
         builder.Property(b => b.LeaveDate).IsRequired().HasMaxLength(10);
         builder.Property(b => b.MobileNo).IsRequired().HasMaxLength(11);
         builder.Property(b => b.ImaghePath).HasMaxLength(200);
-   
+
     }
 }

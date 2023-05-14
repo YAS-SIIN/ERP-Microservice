@@ -1,10 +1,8 @@
-﻿
-using ERP.Infra.Data.Context;
-
+﻿using ERP.Infra.Data.CoreContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
- 
+
 
 namespace ERP.IoC;
 

@@ -1,7 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ERP.Infra.Data.Context;
+using Microsoft.EntityFrameworkCore;
 
 
-namespace ERP.Infra.Data.Context;
+namespace ERP.Infra.Data.CoreContext;
 
 public class MAIN_ERPDBContext : ERPDbContext
 {
@@ -16,7 +17,7 @@ public class READ_ERPDBContext : ERPDbContext
     {
     }
 }
-  
+
 public class WRITE_ERPDBContext : ERPDbContext
 {
     public WRITE_ERPDBContext(DbContextOptions options) : base(options)

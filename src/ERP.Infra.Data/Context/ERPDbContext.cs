@@ -1,4 +1,4 @@
-﻿using ERP.Domain.Entities.Employees;
+﻿using ERP.Domain.Entities.ERP.Employees;
 using Microsoft.EntityFrameworkCore;
 
 namespace ERP.Infra.Data.Context;
