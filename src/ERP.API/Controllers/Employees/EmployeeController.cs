@@ -8,7 +8,7 @@ namespace ERP.API.Controllers.Employee;
 [Route("api/[controller]")]
 [ApiController]
 public class EmployeeController : BaseApiController
-{
+{                                                                         
     /// <summary>
     /// Creates a New Employee.
     /// </summary>
