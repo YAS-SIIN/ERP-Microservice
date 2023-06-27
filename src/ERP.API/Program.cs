@@ -1,5 +1,6 @@
+using ERP.Core.Commands.Employee;
 using ERP.IoC;
-
+using MediatR;
 using Microsoft.AspNetCore.Hosting;
 
 using System.Reflection;
@@ -13,8 +14,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
                                                    
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
 builder.Services.Register(builder.Configuration);
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CreateEmployeeCommandValidator));
 //builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 var app = builder.Build();
 
