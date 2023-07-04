@@ -1,4 +1,4 @@
-﻿using ERP.Application.AutoMapper;
+﻿using ERP.Common.Mapper;
 using ERP.Core.Commands.Employee;
 using ERP.Domain.Entities.ERP.Employees;
 using ERP.Domain.Enums;

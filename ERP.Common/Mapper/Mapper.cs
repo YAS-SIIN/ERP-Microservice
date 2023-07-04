@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace ERP.Application.AutoMapper;
+namespace ERP.Common.Mapper;
 
 public static class Mapper<TEntity, TCommand>
 {

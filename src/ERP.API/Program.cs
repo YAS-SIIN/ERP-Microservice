@@ -1,9 +1,7 @@
-using ERP.Core.Commands.Employee;
+using ERP.Common.Common.Behaviours;
 using ERP.IoC;
 using MediatR;
-using Microsoft.AspNetCore.Hosting;
 
-using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,8 +15,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.Register(builder.Configuration);
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
 
-builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CreateEmployeeCommandValidator));
-//builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+        
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
