@@ -3,12 +3,10 @@ using ERP.Domain.Entities.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-using System.ComponentModel.DataAnnotations;
-
 
 namespace ERP.Domain.Entities.ERP.Employees;
 
-public class EMPEmployee : BaseEntity<long>
+public class Employee : BaseEntity<long>
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }
@@ -24,9 +22,9 @@ public class EMPEmployee : BaseEntity<long>
     public string ImaghePath { get; set; } = "";
 }
 
-public class EMPEmployeeEntityTypeConfiguration : IEntityTypeConfiguration<EMPEmployee>
+public class EmployeeEntityTypeConfiguration : IEntityTypeConfiguration<Employee>
 {
-    public void Configure(EntityTypeBuilder<EMPEmployee> builder)
+    public void Configure(EntityTypeBuilder<Employee> builder)
     {
         builder.Property(b => b.FirstName).IsRequired().HasMaxLength(50);
         builder.Property(b => b.LastName).IsRequired().HasMaxLength(100);

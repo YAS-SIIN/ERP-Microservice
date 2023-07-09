@@ -9,7 +9,7 @@ public class ERPDbContext : DbContext
     {
     }
     #region Employe    
-    public DbSet<EMPEmployee> EMPEmployees { get; set; }
+    public DbSet<Employee> EMPEmployees { get; set; }
     #endregion
                
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -17,10 +17,10 @@ public class ERPDbContext : DbContext
         //var mutableProperties = modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetProperties().Where(p => p.Name == "Status"));
                  
         #region Employe 
-        new EMPEmployeeEntityTypeConfiguration().Configure(modelBuilder.Entity<EMPEmployee>());
+        new EmployeeEntityTypeConfiguration().Configure(modelBuilder.Entity<Employee>());
         #endregion
-        modelBuilder.Entity<EMPEmployee>().Property(x => x.Id).UseHiLo("EMPEmployee_Hilo");
-
+        modelBuilder.Entity<Employee>().ToTable("Employee", schema: "EMP").Property(x => x.Id).UseHiLo("EMPEmployee_Hilo");
+       
         //foreach (var mutableEntityType in modelBuilder.Model.GetEntityTypes())
         //{
         //    mutableEntityType.SetQueryFilter(filterExpr);
