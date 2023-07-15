@@ -1,5 +1,6 @@
 using System.Reflection;
 using ERP.Common.Common.Behaviours;
+using ERP.IoC;
 //using ERP.IoC;
 using MediatR;
 
@@ -13,8 +14,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
                                                    
-//builder.Services.Register(builder.Configuration);
-//builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+ builder.Services.Register(builder.Configuration);
+ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
