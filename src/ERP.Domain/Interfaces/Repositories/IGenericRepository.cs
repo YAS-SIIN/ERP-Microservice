@@ -15,12 +15,12 @@ public interface IGenericRepository<T> where T : class
     T GetById(object id);
     T Get(Expression<Func<T, bool>> predicate);
     IQueryable<T> FromSqlRaw(string strQuery, object[] parametrs);
-    void Add(T entity);
-    void AddRange(List<T> entityList);
-    void Update(T entity);
-    void UpdateRange(List<T> entity);
-    void Delete(T entity);
-    void DeleteRange(List<T> entity);
+    void Add(T entity, bool save = false);
+    void AddRange(List<T> entityList, bool save = false);
+    void Update(T entity, bool save = false);
+    void UpdateRange(List<T> entity, bool save = false);
+    void Delete(T entity, bool save = false);
+    void DeleteRange(List<T> entity, bool save = false);
     
     //--------
 
@@ -30,8 +30,9 @@ public interface IGenericRepository<T> where T : class
     Task<IQueryable<T>> GetAllAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken);
     Task<T> GetByIdAsync(object id, CancellationToken cancellationToken);
     Task<T> GetAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken);
-    Task AddAsync(T entity, CancellationToken cancellationToken);
-    Task AddRangeAsync(List<T> entityList, CancellationToken cancellationToken);
-     
+    Task AddAsync(T entity, CancellationToken cancellationToken, bool save = false);
+    Task AddRangeAsync(List<T> entityList, CancellationToken cancellationToken, bool save = false);
+    void SaveChanges();
+    Task SaveChangesAsync(CancellationToken cancellationToken);
 
 }

@@ -76,39 +76,45 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         return _dbSet.FromSqlRaw(strQuery, parametrs.ToArray());
     }
 
-    public virtual void Add(T entity)
+    public virtual void Add(T entity, bool save = false)
     {
         _dbSet.Add(entity);
+        if (save) SaveChanges();
     }
 
-    public virtual void AddRange(List<T> entityList)
+    public virtual void AddRange(List<T> entityList, bool save = false)
     {
         _dbSet.AddRange(entityList);
+        if (save) SaveChanges();
     }
 
-    public virtual void Update(T entity)
+    public virtual void Update(T entity, bool save = false)
     {
         _dbSet.Attach(entity);
         _context._write_ERPDBContext.Entry(entity).State = EntityState.Modified;
+        if (save) SaveChanges();
     }
 
-    public virtual void UpdateRange(List<T> entity)
+    public virtual void UpdateRange(List<T> entity, bool save = false)
     {
         _dbSet.AttachRange(entity);
         _context._write_ERPDBContext.Entry(entity).State = EntityState.Modified;
+        if (save) SaveChanges();
     }
 
 
-    public virtual void Delete(T entity)
-    { 
+    public virtual void Delete(T entity, bool save = false)
+    {
         if (_context._write_ERPDBContext.Entry(entity).State == EntityState.Detached)
             _dbSet.Attach(entity);
         _dbSet.Remove(entity);
+        if (save) SaveChanges();
     }
 
-    public virtual void DeleteRange(List<T> entity)
+    public virtual void DeleteRange(List<T> entity, bool save = false)
     {
         _dbSet.RemoveRange(entity);
+        if (save) SaveChanges();
     }
 
 
@@ -145,14 +151,16 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         return await _dbSet.Where(predicate).SingleOrDefaultAsync(cancellationToken);
     }
 
-    public async virtual Task AddAsync(T entity, CancellationToken cancellationToken)
+    public async virtual Task AddAsync(T entity, CancellationToken cancellationToken, bool save = false)
     {
         await _dbSet.AddAsync(entity, cancellationToken);
+        if (save) await SaveChangesAsync(cancellationToken);
     }
 
-    public async virtual Task AddRangeAsync(List<T> entityList, CancellationToken cancellationToken)
+    public async virtual Task AddRangeAsync(List<T> entityList, CancellationToken cancellationToken, bool save = false)
     {
         await _dbSet.AddRangeAsync(entityList, cancellationToken);
+        if (save) await SaveChangesAsync(cancellationToken);
     }
 
     #endregion
@@ -165,23 +173,19 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         {
             _context._write_ERPDBContext.SaveChanges();
         }
-        catch
-        {
-        }
+        catch {}
     }
 
     /// <summary>
     /// Save and commit changes in database using multithread
     /// </summary>
-    public async void SaveChangesAsync(CancellationToken cancellationToken)
+    public async Task SaveChangesAsync(CancellationToken cancellationToken)
     {
         try
         {
-           await _context._write_ERPDBContext.SaveChangesAsync(cancellationToken);
+            await _context._write_ERPDBContext.SaveChangesAsync(cancellationToken);
         }
-        catch
-        {
-        }
+        catch {}
     }
 
 }

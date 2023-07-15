@@ -29,8 +29,8 @@ public class EmployeeController : BaseApiController
     [HttpPost]
     public async Task<IActionResult> Create(CreateEmployeeCommand command)
     {
-        CreateEmployeeCommandHandler test = new CreateEmployeeCommandHandler(_unitOfWork);
-        test.Handle(command, new CancellationToken());
+        //CreateEmployeeCommandHandler test = new CreateEmployeeCommandHandler(_unitOfWork);
+        //test.Handle(command, new CancellationToken());
         return Ok(await _mmediator.Send(command));
     }
 }

@@ -19,7 +19,8 @@ namespace ERP.Application.UseCases.Employees.Commands
         public async Task<long> Handle(CreateEmployeeCommand request, CancellationToken cancellationToken)
         {
             Employee inputData = Mapper<Employee, CreateEmployeeCommand>.CommandToEntity(request);
-            await _uw.GetRepository<Employee>(EnumDBContextType.WRITE_ERPDBContext).AddAsync(inputData, cancellationToken);
+            await _uw.GetRepository<Employee>(EnumDBContextType.WRITE_ERPDBContext).AddAsync(inputData, cancellationToken, true);
+ 
             return inputData.Id;
         }
     }
