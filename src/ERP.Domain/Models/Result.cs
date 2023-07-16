@@ -1,4 +1,4 @@
-﻿namespace ERP.Common.Common.Models;
+﻿namespace ERP.Domain.Models;
 
 public class Result
 {
