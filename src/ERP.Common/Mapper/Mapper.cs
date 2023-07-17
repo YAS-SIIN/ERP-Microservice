@@ -2,21 +2,13 @@
 
 namespace ERP.Common.Mapper;
 
-public static class Mapper<TEntity, TCommand>
+public static class Mapper<TDestination, TOrigin>
 {
-    public static TEntity CommandToEntity(TCommand command)
+    public static TDestination MappClasses(TOrigin command)
     {
-        var config = new MapperConfiguration(cfg => cfg.CreateMap<TCommand, TEntity>());
+        var config = new MapperConfiguration(cfg => cfg.CreateMap<TOrigin, TDestination>());
 
         var mapper = config.CreateMapper();
-        return mapper.Map<TEntity>(command);
-    }
-
-    public static TCommand EntityToCommand(TEntity command)
-    {
-        var config = new MapperConfiguration(cfg => cfg.CreateMap<TEntity, TCommand>());
-
-        var mapper = config.CreateMapper();
-        return mapper.Map<TCommand>(command);
-    }
+        return mapper.Map<TDestination>(command);
+    }    
 }
