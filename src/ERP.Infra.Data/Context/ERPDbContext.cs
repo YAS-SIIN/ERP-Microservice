@@ -32,7 +32,27 @@ public class ERPDbContext : DbContext
     }
 
 
-    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+    public override int SaveChanges()
+    {
+        foreach (var entry in ChangeTracker.Entries().Where(entry => entry.Entity.GetType().GetProperty("Created") != null))
+        {
+            if (entry.State == EntityState.Added)
+            {
+                entry.Property("CreateDateTime").CurrentValue = DateTime.Now;
+                continue;
+            }
+
+            if (entry.State == EntityState.Modified)
+            {
+                entry.Property("CreateDateTime").IsModified = false;
+                entry.Property("UpdateDateTime").CurrentValue = DateTime.Now;
+            }
+        }
+
+        return base.SaveChanges();
+    }       
+
+    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken)
     {
         foreach (var entry in ChangeTracker.Entries().Where(entry => entry.Entity.GetType().GetProperty("Created") != null))
         {
