@@ -1,4 +1,6 @@
 ﻿
+using Dapper;
+
 using ERP.Domain.Enums;
 using ERP.Domain.Interfaces.Repositories;
 using ERP.Domain.Interfaces.UnitOfWork;
@@ -10,6 +12,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
 using System;
+using System.Data;
+
 namespace ERP.Infra.Data.UnitOfWork;
 
 public class UnitOfWork : IUnitOfWork
@@ -37,6 +41,60 @@ public class UnitOfWork : IUnitOfWork
     {                                     
         return new GenericRepository<T>(_context, dbContextType);
     }
+
+    public IEnumerable<T> SqlQueryView<T>(EnumDBContextType dbContextType, string sql, DynamicParameters parameters = null) where T : class
+    {
+
+        IDbConnection dbConnection = _context._main_ERPDBContext.Database.GetDbConnection();
+
+        switch (dbContextType)
+        {
+            case EnumDBContextType.MAIN_ERPDBContext:
+                dbConnection = _context._main_ERPDBContext.Database.GetDbConnection();
+                break;
+            case EnumDBContextType.READ_ERPDBContext:
+                dbConnection = _context._read_ERPDBContext.Database.GetDbConnection();
+                break;
+            case EnumDBContextType.WRITE_ERPDBContext:
+                dbConnection = _context._write_ERPDBContext.Database.GetDbConnection();
+                break;
+            default:
+                dbConnection = _context._main_ERPDBContext.Database.GetDbConnection();
+                break;
+        }
+
+        using (dbConnection)
+        {
+            return dbConnection.Query<T>(sql, parameters);
+        }
+    }
+
+    public async Task<IEnumerable<T>> SqlQueryViewAsync<T>(EnumDBContextType dbContextType, string sql, DynamicParameters parameters = null) where T : class
+    {
+        IDbConnection dbConnection = _context._main_ERPDBContext.Database.GetDbConnection();
+
+        switch (dbContextType)
+        {
+            case EnumDBContextType.MAIN_ERPDBContext:
+                dbConnection = _context._main_ERPDBContext.Database.GetDbConnection();
+                break;
+            case EnumDBContextType.READ_ERPDBContext:
+                dbConnection = _context._read_ERPDBContext.Database.GetDbConnection();
+                break;
+            case EnumDBContextType.WRITE_ERPDBContext:
+                dbConnection = _context._write_ERPDBContext.Database.GetDbConnection();
+                break;
+            default:
+                dbConnection = _context._main_ERPDBContext.Database.GetDbConnection();
+                break;
+        }
+
+        using (dbConnection)
+        {
+            return await dbConnection.QueryAsync<T>(sql, parameters);
+        }
+    }
+
 
     //public virtual void Dispose(bool disposing)
     //{
