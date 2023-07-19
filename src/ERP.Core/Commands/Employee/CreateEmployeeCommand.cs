@@ -1,4 +1,7 @@
-﻿using FluentValidation;
+﻿using ERP.Domain.DTOs.Exceptions;
+using ERP.Domain.Models;
+
+using FluentValidation;
 
 using MediatR;
 
@@ -11,32 +14,32 @@ using System.Threading.Tasks;
 
 namespace ERP.Core.Commands.Employee;
 
-public class CreateEmployeeCommand : IRequest<long>
+public class CreateEmployeeCommand : IRequest<Result<long>>
 {
     [DisplayName("نام")]
-    public string FirstName { get; set; }
+    public string? FirstName { get; set; }
     [DisplayName("نام خانوادگی")]
-    public string LastName { get; set; }
+    public string? LastName { get; set; }
     [DisplayName("کد پرسنلی")]
     public int EmpoloyeeNo { get; set; } = 0;
     [DisplayName("نام پدر")]
-    public string FatherName { get; set; }
+    public string? FatherName { get; set; }
     [DisplayName("کد ملی")]
-    public string NationalCode { get; set; }
+    public string? NationalCode { get; set; }
     [DisplayName("شماره شناسنامه")]
-    public string IdentifyNo { get; set; }
+    public string? IdentifyNo { get; set; }
     [DisplayName("تاریخ تولد")]
-    public string DateOfBirth { get; set; }
+    public string? DateOfBirth { get; set; }
     [DisplayName("جنسیت")]
     public short Gender { get; set; }
     [DisplayName("تاریخ استخدام")]
-    public string HireDate { get; set; }
+    public string? HireDate { get; set; }
     [DisplayName("تاریخ ترک کار")]
-    public string LeaveDate { get; set; } = "";
+    public string? LeaveDate { get; set; } = "";
     [DisplayName("شماره موبایل")]
-    public string MobileNo { get; set; }
+    public string? MobileNo { get; set; }
     [DisplayName("مسیرعکس")]
-    public string ImaghePath { get; set; } = "";
+    public string? ImaghePath { get; set; } = "";
 }
 
 

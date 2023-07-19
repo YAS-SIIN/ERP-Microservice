@@ -7,19 +7,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="DTOs\Common\**" />
     <Compile Remove="Events\**" />
     <Compile Remove="Exceptions\**" />
+    <EmbeddedResource Remove="DTOs\Common\**" />
     <EmbeddedResource Remove="Events\**" />
     <EmbeddedResource Remove="Exceptions\**" />
+    <None Remove="DTOs\Common\**" />
     <None Remove="Events\**" />
     <None Remove="Exceptions\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DTOs\Common\" />
+    <None Remove="DTOs\ErrorDto.cs~RF2df38c.TMP" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.143" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.8" />
   </ItemGroup>
 

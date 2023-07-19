@@ -1,5 +1,6 @@
 ﻿using ERP.Application.UseCases.Employees.Commands;
 using ERP.Core.Commands.Employee;
+using ERP.Core.Queries.Employee;
 using ERP.Domain.Interfaces.UnitOfWork;
 
 using MediatR;
@@ -28,9 +29,18 @@ public class EmployeeController : BaseApiController
     /// <returns></returns>
     [HttpPost]
     public async Task<IActionResult> Create(CreateEmployeeCommand command)
+    { 
+        return OkData(await _mmediator.Send(command));
+    }
+
+    /// <summary>
+    /// Get All Employees.
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet]
+    public async Task<IActionResult> GetAll()
     {
-        //CreateEmployeeCommandHandler test = new CreateEmployeeCommandHandler(_unitOfWork);
-        //test.Handle(command, new CancellationToken());
-        return Ok(await _mmediator.Send(command));
+        var query = new GetAllEmployeeQuery();
+        return OkData(await _mmediator.Send(query));
     }
 }

@@ -67,7 +67,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
 
     public T Get(Expression<Func<T, bool>> predicate)
     {
-        return _dbSet.Where(predicate).SingleOrDefault();
+        return _dbSet.Where(predicate).FirstOrDefault();
     }
 
     public virtual IQueryable<T> FromSqlRaw(string strQuery, object[] parametrs)
@@ -148,7 +148,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
 
     public async Task<T> GetAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken)
     {
-        return await _dbSet.Where(predicate).SingleOrDefaultAsync(cancellationToken);
+        return await _dbSet.Where(predicate).FirstOrDefaultAsync(cancellationToken);
     }
 
     public async virtual Task AddAsync(T entity, CancellationToken cancellationToken, bool save = false)
