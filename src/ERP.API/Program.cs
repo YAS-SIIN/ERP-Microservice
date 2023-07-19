@@ -1,5 +1,6 @@
 using System.Reflection;
 
+using ERP.Application;
 using ERP.Application.UseCases.Employees.Commands;
 using ERP.Common.Common.Behaviours;
 using ERP.Core.Commands.Employee;
@@ -19,7 +20,7 @@ builder.Services.AddSwaggerGen();
                                                    
  builder.Services.Register(builder.Configuration);
  //builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
- builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CreateEmployeeCommandHandler).GetTypeInfo().Assembly));
+
  
 
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));

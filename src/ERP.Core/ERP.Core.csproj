@@ -25,4 +25,8 @@
     <ProjectReference Include="..\ERP.Domain\ERP.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Queries\" />
+  </ItemGroup>
+
 </Project>
