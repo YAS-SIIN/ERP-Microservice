@@ -70,12 +70,6 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         return _dbSet.Where(predicate).FirstOrDefault();
     }
 
-    public virtual IQueryable<T> FromSqlRaw(string strQuery, object[] parametrs)
-    {
-
-        return _dbSet.FromSqlRaw(strQuery, parametrs.ToArray());
-    }
-
     public virtual void Add(T entity, bool save = false)
     {
         _dbSet.Add(entity);
