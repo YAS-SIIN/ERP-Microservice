@@ -1,8 +1,11 @@
 ﻿
 
+using ERP.Common.Behaviours;
 using ERP.Domain.Interfaces.UnitOfWork;
 using ERP.Infra.Data.CoreContext;
 using ERP.Infra.Data.UnitOfWork;
+
+using MediatR;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -23,6 +26,10 @@ public static class APIConfiguration
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<CoreDBContextInjection>();
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ERP.Application.InjectMediatR).GetTypeInfo().Assembly));
+
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+
     }
 
 }

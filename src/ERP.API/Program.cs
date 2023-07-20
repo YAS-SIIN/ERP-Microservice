@@ -1,12 +1,5 @@
-using System.Reflection;
-
-using ERP.Application;
-using ERP.Application.UseCases.Employees.Commands;
-using ERP.Common.Common.Behaviours;
-using ERP.Core.Commands.Employee;
-using ERP.IoC;
-//using ERP.IoC;
-using MediatR;
+ 
+using ERP.IoC; 
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,9 +16,6 @@ builder.Services.AddSwaggerGen();
 
  
 
-builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
-builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
-        
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

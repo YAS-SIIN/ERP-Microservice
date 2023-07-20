@@ -14,14 +14,6 @@ namespace ERP.API.Controllers.Employee;
 [ApiController]
 public class EmployeeController : BaseApiController
 {
-    private IMediator _mmediator;
-    private readonly IUnitOfWork _unitOfWork;
-    public EmployeeController(IMediator mmediator, IUnitOfWork unitOfWork)
-    {
-        _mmediator = mmediator;
-        _unitOfWork = unitOfWork;
-    }
-
     /// <summary>
     /// Creates a New Employee.
     /// </summary>

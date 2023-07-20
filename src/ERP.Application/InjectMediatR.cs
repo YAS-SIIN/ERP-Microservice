@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERP.Application
+namespace ERP.Application;
+
+public class InjectMediatR
 {
-    public class InjectMediatR
-    {
-    }
 }
