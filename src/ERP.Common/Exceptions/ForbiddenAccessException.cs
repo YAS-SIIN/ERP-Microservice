@@ -1,4 +1,4 @@
-﻿namespace ERP.Common.Common.Exceptions;
+﻿namespace ERP.Common.Exceptions;
 
 public class ForbiddenAccessException : Exception
 {
