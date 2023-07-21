@@ -22,7 +22,7 @@ public class EmployeeController : BaseApiController
     [HttpPost]
     public async Task<IActionResult> Create(CreateEmployeeCommand command)
     { 
-        return OkData(await _mmediator.Send(command));
+        return OkData(await Mediator.Send(command));
     }
 
     /// <summary>
@@ -33,6 +33,6 @@ public class EmployeeController : BaseApiController
     public async Task<IActionResult> GetAll()
     {
         var query = new GetAllEmployeeQuery();
-        return OkData(await _mmediator.Send(query));
+        return OkData(await Mediator.Send(query));
     }
 }

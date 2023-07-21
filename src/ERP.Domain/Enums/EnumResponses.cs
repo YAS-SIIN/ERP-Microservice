@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERP.Common.Enums;
+namespace ERP.Domain.Enums;
 
 public static class EnumResponses
 {

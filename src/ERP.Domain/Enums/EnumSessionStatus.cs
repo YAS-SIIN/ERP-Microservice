@@ -1,7 +1,7 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
 
-namespace ERP.Common.Enums;
+namespace ERP.Domain.Enums;
 
 public enum EnumSessionStatus
 {
