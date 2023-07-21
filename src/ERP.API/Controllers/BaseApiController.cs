@@ -16,7 +16,7 @@ public abstract class BaseApiController : ControllerBase
     private IMediator _mediator;      
     protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
 
-    public IActionResult OkReult<T>(Result<T> response)
+    public IActionResult OkReult<T>(ResultDto<T> response)
     {
         return new ObjectResult(response);
     }

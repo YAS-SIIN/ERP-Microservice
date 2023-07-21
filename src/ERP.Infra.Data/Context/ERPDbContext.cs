@@ -34,7 +34,7 @@ public class ERPDbContext : DbContext
 
     public override int SaveChanges()
     {
-        foreach (var entry in ChangeTracker.Entries().Where(entry => entry.Entity.GetType().GetProperty("Created") != null))
+        foreach (var entry in ChangeTracker.Entries().Where(entry => entry.Entity.GetType().GetProperty("CreateDateTime") != null))
         {
             if (entry.State == EntityState.Added)
             {
@@ -54,7 +54,7 @@ public class ERPDbContext : DbContext
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken)
     {
-        foreach (var entry in ChangeTracker.Entries().Where(entry => entry.Entity.GetType().GetProperty("Created") != null))
+        foreach (var entry in ChangeTracker.Entries().Where(entry => entry.Entity.GetType().GetProperty("CreateDateTime") != null))
         {
             if (entry.State == EntityState.Added)
             {
