@@ -1,6 +1,6 @@
 ﻿
 
-using ERP.Application.Behaviours;
+using ERP.Application.Behaviors;
 using ERP.Domain.Interfaces.UnitOfWork;
 using ERP.Infra.Data.CoreContext;
 using ERP.Infra.Data.UnitOfWork;
@@ -21,14 +21,14 @@ public static class ServerConfiguration
     {
         services.AddDbContext<MAIN_ERPDBContext>(options => options.UseSqlServer(configuration["ApplicationOptions:MAIN_ERPConnectionString"]));
         services.AddDbContext<READ_ERPDBContext>(options => options.UseSqlServer(configuration["ApplicationOptions:READ_ERPConnectionString"]));
-        services.AddDbContext<WRITE_ERPDBContext>(options => options.UseSqlServer(configuration["ApplicationOptions:WRTIE_ERPConnectionString"]));
+        services.AddDbContext<WRITE_ERPDBContext>(options => options.UseSqlServer(configuration["ApplicationOptions:WRITE_ERPConnectionString"]));
        
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<CoreDBContextInjection>();
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ERP.Application.InjectMediatR).GetTypeInfo().Assembly));
 
-        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
-        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehavior<,>));
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
     }
 
 }
