@@ -1,7 +1,6 @@
-﻿namespace ERP.Core.Messages
+﻿namespace ERP.Core.Messages;
+
+public interface IMessage<TPrimaryKey>
 {
-    public interface IMessage<TPrimaryKey>
-    {
-        TPrimaryKey Id { get; set; }
-    }
+    TPrimaryKey Id { get; set; }
 }

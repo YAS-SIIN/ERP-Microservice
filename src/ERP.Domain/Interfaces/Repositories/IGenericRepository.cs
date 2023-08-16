@@ -14,7 +14,6 @@ public interface IGenericRepository<T> where T : class
     IQueryable<T> GetAll(Expression<Func<T, bool>> predicate);
     T GetById(object id);
     T Get(Expression<Func<T, bool>> predicate);
-    IQueryable<T> FromSqlRaw(string strQuery, object[] parametrs);
     void Add(T entity, bool save = false);
     void AddRange(List<T> entityList, bool save = false);
     void Update(T entity, bool save = false);
