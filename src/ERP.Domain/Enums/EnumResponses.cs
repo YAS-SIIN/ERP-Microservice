@@ -16,10 +16,7 @@ namespace MabnaDBTest.Common.Enums
 
         [Display(Name = "عملیات با موفقیت انجام شد.")]
         public const int Done = 101;
-
-        [Display(Name = "خطایی در انجام عملیات رخ داده است.")]
-        public const int Error = 102;
-                
+                        
         [Display(Name = "فرمت فایل مجاز نمی باشد.")]
         public const int FileFormat = 103;
 
@@ -38,5 +35,10 @@ namespace MabnaDBTest.Common.Enums
         [Display(Name = "اطلاعاتی با موفقیت ثبت شد.")]
         public const int Success = 200;
 
+        [Display(Name = "Error happened.")]
+        public const int Error = 500;
+
+        [Display(Name = "Bad Request.")]
+        public const int BadRequest = 404;
     }
 }

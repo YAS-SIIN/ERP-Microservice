@@ -1,8 +1,6 @@
 using System.Reflection;
+ 
 
-using ERP.Application;
-using ERP.Application.UseCases.Employees.Commands;
-using ERP.Common.Common.Behaviours;
 using ERP.Core.Commands.Employee;
 using ERP.IoC;
 //using ERP.IoC;
@@ -21,10 +19,6 @@ builder.Services.AddSwaggerGen();
  builder.Services.Register(builder.Configuration);
  //builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
- 
-
-builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
-builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
         
 var app = builder.Build();
 

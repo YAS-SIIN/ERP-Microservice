@@ -2,8 +2,7 @@
 
 using ERP.Domain.DTOs.Employee;
 using ERP.Domain.DTOs.Exceptions;
-using ERP.Domain.Models;
-
+ 
 using MediatR;
 
 using System;
@@ -14,6 +13,6 @@ using System.Threading.Tasks;
 
 namespace ERP.Core.Queries.Employee;
 
-public class GetAllEmployeeQuery : IRequest<Result<IList<GetAllEmployeeResponse>>>
+public class GetAllEmployeeQuery : IRequest<ResultDto<IList<GetEmployeeResponse>>>
 {
 }

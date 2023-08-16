@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{34075DCA-C97
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{DF645F1D-C121-4389-974A-18E0B4DB9BEF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ERP.API", "src\ERP.API\ERP.API.csproj", "{1B9A8051-6D61-4DAF-8428-D83BEB966242}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ERP.Presentation.APIBackend", "src\ERP.Presentation\APIBackend\ERP.Presentation.APIBackend.csproj", "{1B9A8051-6D61-4DAF-8428-D83BEB966242}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ERP.Application", "src\ERP.Application\ERP.Application.csproj", "{27F3D14E-162C-46E4-BAC9-638FFF8054EC}"
 EndProject
@@ -15,11 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ERP.Core", "src\ERP.Core\ER
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ERP.Domain", "src\ERP.Domain\ERP.Domain.csproj", "{C2CC6431-FB3D-4579-B02E-88A4B886528F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ERP.Infra.Data", "src\ERP.Infra.Data\ERP.Infra.Data.csproj", "{E3CC866C-7823-4ECC-B496-789C0FD0083B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ERP.Infra.Data", "src\ERP.Infra\Data\ERP.Infra.Data.csproj", "{E3CC866C-7823-4ECC-B496-789C0FD0083B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ERP.IoC", "src\ERP.IoC\ERP.IoC.csproj", "{3396BA78-9C49-4499-BC0C-3FE78DEC8840}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ERP.Common", "src\ERP.Common\ERP.Common.csproj", "{8933EEAB-2FE7-4592-86A9-275BF334C60C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ERP.Presentation.Shared", "src\ERP.Presentation\Shared\ERP.Presentation.Shared.csproj", "{8933EEAB-2FE7-4592-86A9-275BF334C60C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

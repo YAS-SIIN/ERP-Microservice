@@ -1,7 +1,7 @@
 ﻿
 namespace ERP.Domain.DTOs.Employee;
 
-public class GetAllEmployeeResponse
+public class GetEmployeeResponse
 {
     public long Id { get; set; }
     public string? FirstName { get; set; }

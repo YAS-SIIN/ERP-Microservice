@@ -1,4 +1,4 @@
-namespace ERP.API;
+namespace ERP.APIBackend;
 
 public class WeatherForecast
 {

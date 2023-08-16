@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace ERP.Common.Mapper;
+namespace ERP.Presentation.Shared.Mapper;
 
 public static class Mapper<TDestination, TOrigin>
 {

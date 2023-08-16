@@ -1,6 +1,6 @@
 ﻿using FluentValidation.Results;
 
-namespace ERP.Common.Common.Exceptions;
+namespace ERP.Presentation.Shared.Exceptions;
 
 public class ValidationException : Exception
 {

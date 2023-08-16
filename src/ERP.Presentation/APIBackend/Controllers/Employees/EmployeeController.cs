@@ -1,4 +1,4 @@
-﻿using ERP.Application.UseCases.Employees.Commands;
+﻿
 using ERP.Core.Commands.Employee;
 using ERP.Core.Queries.Employee;
 using ERP.Domain.Interfaces.UnitOfWork;
@@ -8,7 +8,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ERP.API.Controllers.Employee;
+namespace ERP.APIBackend.Controllers.Employee;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -29,8 +29,8 @@ public class EmployeeController : BaseApiController
     /// <returns></returns>
     [HttpPost]
     public async Task<IActionResult> Create(CreateEmployeeCommand command)
-    { 
-        return OkData(await _mmediator.Send(command));
+    {
+        return OkData(await Mediator.Send(command));
     }
 
     /// <summary>

@@ -1,8 +1,8 @@
 ﻿using FluentValidation;
 using MediatR;
-using ValidationException = ERP.Common.Common.Exceptions.ValidationException;
+using ValidationException = ERP.Presentation.Shared.Exceptions.ValidationException;
 
-namespace ERP.Common.Common.Behaviours;
+namespace ERP.Application.Behaviours;
 
 public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
      where TRequest : notnull

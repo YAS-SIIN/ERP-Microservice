@@ -20,10 +20,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ERP.Application\ERP.Application.csproj" />
-    <ProjectReference Include="..\ERP.Common\ERP.Common.csproj" />
-    <ProjectReference Include="..\ERP.Core\ERP.Core.csproj" />
-    <ProjectReference Include="..\ERP.IoC\ERP.IoC.csproj" />
+    <ProjectReference Include="..\..\ERP.Core\ERP.Core.csproj" />
+    <ProjectReference Include="..\..\ERP.IoC\ERP.IoC.csproj" />
+    <ProjectReference Include="..\Shared\ERP.Presentation.Shared.csproj" />
   </ItemGroup>
 
 </Project>

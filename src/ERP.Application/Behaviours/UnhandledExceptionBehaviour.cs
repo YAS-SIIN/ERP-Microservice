@@ -1,6 +1,6 @@
 ﻿using MediatR;                      
 
-namespace ERP.Common.Common.Behaviours;
+namespace ERP.Application.Behaviours;
 
 public class UnhandledExceptionBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull
 {

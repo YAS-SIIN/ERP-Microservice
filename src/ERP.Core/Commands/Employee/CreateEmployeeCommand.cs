@@ -1,5 +1,5 @@
 ﻿using ERP.Domain.DTOs.Exceptions;
-using ERP.Domain.Models;
+ 
 
 using FluentValidation;
 
@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace ERP.Core.Commands.Employee;
 
-public class CreateEmployeeCommand : IRequest<Result<long>>
+public class CreateEmployeeCommand : IRequest<ResultDto<long>>
 {
     [DisplayName("نام")]
     public string? FirstName { get; set; }
