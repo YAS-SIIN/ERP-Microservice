@@ -10,7 +10,7 @@ public class Employee : BaseEntity<long>
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }
-    public int EmpoloyeeNo { get; set; } = 0;
+    public int EmployeeNo { get; set; } = 0;
     public string FatherName { get; set; }
     public string NationalCode { get; set; }
     public string IdentifyNo { get; set; }
@@ -19,7 +19,7 @@ public class Employee : BaseEntity<long>
     public string HireDate { get; set; }
     public string LeaveDate { get; set; } = "";
     public string MobileNo { get; set; }
-    public string ImaghePath { get; set; } = "";
+    public string ImagePath { get; set; } = "";
 }
 
 public class EmployeeEntityTypeConfiguration : IEntityTypeConfiguration<Employee>
@@ -28,7 +28,7 @@ public class EmployeeEntityTypeConfiguration : IEntityTypeConfiguration<Employee
     {
         builder.Property(b => b.FirstName).IsRequired().HasMaxLength(50);
         builder.Property(b => b.LastName).IsRequired().HasMaxLength(100);
-        builder.Property(b => b.EmpoloyeeNo).IsRequired();
+        builder.Property(b => b.EmployeeNo).IsRequired();
         builder.Property(b => b.FatherName).IsRequired().HasMaxLength(100);
         builder.Property(b => b.NationalCode).IsRequired().HasMaxLength(10);
         builder.Property(b => b.IdentifyNo).IsRequired().HasMaxLength(10);
@@ -37,7 +37,7 @@ public class EmployeeEntityTypeConfiguration : IEntityTypeConfiguration<Employee
         builder.Property(b => b.HireDate).IsRequired().HasMaxLength(10);
         builder.Property(b => b.LeaveDate).IsRequired().HasMaxLength(10);
         builder.Property(b => b.MobileNo).IsRequired().HasMaxLength(11);
-        builder.Property(b => b.ImaghePath).HasMaxLength(200);
+        builder.Property(b => b.ImagePath).HasMaxLength(200);
 
     }
 }

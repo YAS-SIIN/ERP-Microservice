@@ -2,14 +2,14 @@
 using MediatR;
 using ValidationException = ERP.Presentation.Shared.Exceptions.ValidationException;
 
-namespace ERP.Application.Behaviours;
+namespace ERP.Application.Behaviors;
 
-public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
      where TRequest : notnull
 {
     private readonly IEnumerable<IValidator<TRequest>> _validators;
 
-    public ValidationBehaviour(IEnumerable<IValidator<TRequest>> validators)
+    public ValidationBehavior(IEnumerable<IValidator<TRequest>> validators)
     {
         _validators = validators;
     }
@@ -17,7 +17,7 @@ public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TReque
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
 
-        if (_validators.Any())
+            if (_validators.Any())
         {
             var context = new ValidationContext<TRequest>(request);
 

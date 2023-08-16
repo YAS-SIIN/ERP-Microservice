@@ -1,11 +1,11 @@
 ﻿using MediatR;                      
 
-namespace ERP.Application.Behaviours;
+namespace ERP.Application.Behaviors;
 
-public class UnhandledExceptionBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull
+public class UnhandledExceptionBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull
 {
 
-    public UnhandledExceptionBehaviour()
+    public UnhandledExceptionBehavior()
     {
     }
          
@@ -14,12 +14,11 @@ public class UnhandledExceptionBehaviour<TRequest, TResponse> : IPipelineBehavio
         try
         {
             return await next();
-        }
+        } 
         catch (Exception ex)
         {
             var requestName = typeof(TRequest).Name;
-
-            throw;
+            throw ex;
         }
     }
 }

@@ -8,7 +8,7 @@ public class ERPDbContext : DbContext
     public ERPDbContext(DbContextOptions options) : base(options)
     {
     }
-    #region Employe    
+    #region Employee    
     public DbSet<Employee> EMPEmployees { get; set; }
     #endregion
                
@@ -16,7 +16,7 @@ public class ERPDbContext : DbContext
     {
         //var mutableProperties = modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetProperties().Where(p => p.Name == "Status"));
                  
-        #region Employe 
+        #region Employee 
         new EmployeeEntityTypeConfiguration().Configure(modelBuilder.Entity<Employee>());
         #endregion
         modelBuilder.Entity<Employee>().ToTable("Employee", schema: "EMP").Property(x => x.Id).UseHiLo("EMPEmployee_Hilo");
