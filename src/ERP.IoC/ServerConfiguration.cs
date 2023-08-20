@@ -10,6 +10,8 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using FluentValidation.Validators;
+using FluentValidation;
 
 using System.Reflection;
 
@@ -25,10 +27,11 @@ public static class ServerConfiguration
        
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<CoreDBContextInjection>();
-        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ERP.Application.InjectMediatR).GetTypeInfo().Assembly));
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ERP.Application.InjectApplication).GetTypeInfo().Assembly));
+        services.AddValidatorsFromAssembly(typeof(ERP.Core.InjectCore).GetTypeInfo().Assembly);
 
-        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehavior<,>));
-        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+        services.AddScoped(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehavior<,>));
+        services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
     }
 
 }

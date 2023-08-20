@@ -10,16 +10,16 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["ERP.API/ERP.API.csproj", "ERP.API/"]
-RUN dotnet restore "ERP.API/ERP.API.csproj"
+COPY ["APIBackend/ERP.Presentation.APIBackend.csproj", "ERP.API/"]
+RUN dotnet restore "APIBackend/ERP.Presentation.APIBackend.csproj"
 COPY . .
-WORKDIR "/src/ERP.API"
-RUN dotnet build "ERP.API.csproj" -c Release -o /app/build
+WORKDIR "/src/ERP.Presentation/APIBackend"
+RUN dotnet build "ERP.Presentation.APIBackend.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "ERP.API.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "ERP.Presentation.APIBackend.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "ERP.API.dll"]
+ENTRYPOINT ["dotnet", "ERP.Presentation.APIBackend.dll"]
