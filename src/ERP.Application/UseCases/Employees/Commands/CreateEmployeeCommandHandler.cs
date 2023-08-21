@@ -9,6 +9,7 @@ using ERP.Presentation.Shared.Mapper;
 using ERP.Domain.Common.Enums;
 
 using MediatR;
+using ERP.Presentation.Shared.Tools;
 
 namespace ERP.Application.UseCases.Employees.Commands;
 
@@ -26,6 +27,6 @@ public class CreateEmployeeCommandHandler : IRequestHandler<CreateEmployeeComman
 
         await _uw.GetRepository<Domain.Entities.ERP.Employees.Employee>(EnumDBContextType.WRITE_ERPDBContext).AddAsync(inputData, cancellationToken, true);
 
-        return ResultDto<long>.ReturnData(EnumResponses.Success, inputData.Id);
+        return ResultDto<long>.ReturnData(inputData.Id, (int)EnumResponseStatus.OK, (int)EnumResponseErrors.Success,EnumResponseErrors.Success.GetDisplayName());
     }
 }

@@ -1,6 +1,6 @@
-﻿
-using ERP.Core.Commands.Employee;
-using ERP.Core.Queries.Employee;
+﻿ 
+using ERP.Core.Commands.Employees;
+using ERP.Core.Queries.Employees;
 using ERP.Domain.Interfaces.UnitOfWork;
 
 using MediatR;
@@ -16,17 +16,33 @@ public class EmployeeController : BaseApiController
 {
     private IMediator _mmediator;
     private readonly IUnitOfWork _unitOfWork;
-    public EmployeeController(IMediator mmediator, IUnitOfWork unitOfWork)
+
+    /// <summary>
+    /// Get all Employee.
+    /// </summary>
+    /// <returns>Result</returns>
+    [HttpGet]
+    public async Task<IActionResult> GetAll()
     {
-        _mmediator = mmediator;
-        _unitOfWork = unitOfWork;
+        var query = new GetAllEmployeeQuery();
+        return OkData(await Mediator.Send(query));
     }
 
     /// <summary>
-    /// Creates a New Employee.
+    /// Get Employee.
+    /// </summary>
+    /// <returns>Result</returns>
+    [HttpGet("{Id}")]
+    public async Task<IActionResult> Get([FromRoute] GetEmployeeQuery query)
+    {
+        return OkData(await Mediator.Send(query));
+    }
+
+    /// <summary>
+    /// Creates a new Employee.
     /// </summary>
     /// <param name="command"></param>
-    /// <returns></returns>
+    /// <returns>Result</returns>
     [HttpPost]
     public async Task<IActionResult> Create(CreateEmployeeCommand command)
     {
@@ -34,13 +50,24 @@ public class EmployeeController : BaseApiController
     }
 
     /// <summary>
-    /// Get All Employees.
+    /// Update Employee.
     /// </summary>
-    /// <returns></returns>
-    [HttpGet]
-    public async Task<IActionResult> GetAll()
+    /// <param name="command"></param>
+    /// <returns>Result</returns>
+    [HttpPut]
+    public async Task<IActionResult> Update(UpdateEmployeeCommand command)
     {
-        var query = new GetAllEmployeeQuery();
-        return OkData(await _mmediator.Send(query));
+        return OkData(await Mediator.Send(command));
+    }
+
+    /// <summary>
+    /// Delete Employee.
+    /// </summary>
+    /// <returns>Result</returns>
+    [HttpDelete("{Id}")]
+    public async Task<IActionResult> Delete([FromRoute] DeleteEmployeeCommand command)
+    {
+
+        return OkData(await Mediator.Send(command));
     }
 }

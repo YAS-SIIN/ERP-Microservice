@@ -8,36 +8,33 @@ using System.Threading.Tasks;
 
 namespace ERP.Domain.Common.Enums;
 
-public static class EnumResponses
+public enum EnumResponseErrors : int
 {
-
     [Display(Name = "اطلاعاتی یافت نشد.")]
-    public const int NotFound = 100;
+    NotFound = 100,
 
     [Display(Name = "عملیات با موفقیت انجام شد.")]
-    public const int Done = 101;
-                    
+    Done = 101,
+
     [Display(Name = "فرمت فایل مجاز نمی باشد.")]
-    public const int FileFormat = 103;
+    FileFormat = 103,
 
     [Display(Name = "فایل انتخاب نشده است.")]
-    public const int NotFoundFile = 104;
+    NotFoundFile = 104,
 
     [Display(Name = "شما به این عملیات دسترسی ندارید.")]
-    public const int NotAccess = 105;
+    NotAccess = 105,
 
     [Display(Name = "شما وارد سیستم شده اید.")]
-    public const int LoginedUser = 106;
+    LoginedUser = 106,
 
     [Display(Name = "اطلاعات مورد نظر قابل حذف نمی باشد.")]
-    public const int NotDelete = 107;
-                          
+    NotDelete = 107,
+
     [Display(Name = "اطلاعاتی با موفقیت ثبت شد.")]
-    public const int Success = 200;
-
-    [Display(Name = "Error happened.")]
-    public const int Error = 500;
-
-    [Display(Name = "Bad Request.")]
-    public const int BadRequest = 404;
+    Success = 200,
+     
+    [Display(Name = "خطایی در انجام عملیات رخ داده است.")]
+    Error = 400,
+     
 }

@@ -12,13 +12,13 @@ namespace ERP.Core.Commands.Employees;
 /// <summary>
 /// Delete employee view model
 /// </summary>
-public class DeleteEmployeeCommand : IRequest<ResultDto<int>>
+public class DeleteEmployeeCommand : IRequest<ResultDto<long>>
 {
     /// <summary>
     /// Employee Id
     /// </summary> 
     [DisplayName("شناسه یکتای پرسنل")]
-    public int Id { get; set; }
+    public long Id { get; set; }
      
 }
 

@@ -23,5 +23,5 @@ public class GetEmployeeQuery : IRequest<ResultDto<GetEmployeeResponse>>
     /// Employee Id
     /// </summary>
     [DisplayName("شناسه یکتای پرسنل")]
-    public int Id { get; set; }
+    public long Id { get; set; }
 }

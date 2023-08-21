@@ -12,6 +12,7 @@ using ERP.Domain.Common.Enums;
 using MediatR;
 
 using Microsoft.EntityFrameworkCore;
+using ERP.Presentation.Shared.Tools;
 
 namespace ERP.Application.Application.UseCases.Customers.Queries;
 
@@ -31,11 +32,11 @@ public class GetEmployeeQueryHandler : IRequestHandler<GetEmployeeQuery, ResultD
         var response = await _uw.GetRepository<Employee>(EnumDBContextType.READ_ERPDBContext).GetByIdAsync(request.Id, cancellationToken); 
 
         if (response is not Employee)
-            throw new ErrorException(EnumResponses.NotFound, "اطلاعاتی یافت نشد.");
+            throw new ErrorException((int)EnumResponseErrors.NotFound, EnumResponseErrors.NotFound.GetDisplayName());
 
         GetEmployeeResponse resData = Mapper<GetEmployeeResponse, Employee>.MappClasses(response);
 
-        return ResultDto<GetEmployeeResponse>.ReturnData(EnumResponses.Success, resData);
+        return ResultDto<GetEmployeeResponse>.ReturnData(resData, (int)EnumResponseStatus.OK, (int)EnumResponseErrors.Success, EnumResponseErrors.Success.GetDisplayName());
     }
  
 }

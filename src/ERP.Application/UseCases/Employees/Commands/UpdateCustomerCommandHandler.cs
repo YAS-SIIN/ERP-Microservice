@@ -7,6 +7,7 @@ using ERP.Domain.Interfaces.UnitOfWork;
 using ERP.Core.Commands.Employees;
 using ERP.Domain.DTOs.Employee;
 using ERP.Presentation.Shared.Mapper;
+using ERP.Presentation.Shared.Tools;
 
 namespace ERP.Application.UseCases.Employee.Commands;
 
@@ -23,14 +24,14 @@ public class UpdateEmployeeCommandHandler : IRequestHandler<UpdateEmployeeComman
         var inputData = await _uw.GetRepository<Domain.Entities.ERP.Employees.Employee>(EnumDBContextType.WRITE_ERPDBContext).GetByIdAsync((object)request.Id, cancellationToken);
 
         if (inputData is null && inputData is not Domain.Entities.ERP.Employees.Employee)
-            throw new ErrorException(EnumResponses.NotFound, "Data not found.");
-         
+            throw new ErrorException((int)EnumResponseErrors.NotFound, EnumResponseErrors.NotFound.GetDisplayName());
+
         inputData = Mapper<Domain.Entities.ERP.Employees.Employee, UpdateEmployeeCommand>.MappClasses(request);
          
         _uw.GetRepository<Domain.Entities.ERP.Employees.Employee>(EnumDBContextType.WRITE_ERPDBContext).Update(inputData, true);
 
         GetEmployeeResponse outputData = Mapper<GetEmployeeResponse, Domain.Entities.ERP.Employees.Employee>.MappClasses(inputData);
 
-        return ResultDto<GetEmployeeResponse>.ReturnData(EnumResponses.Success, outputData);
+        return ResultDto<GetEmployeeResponse>.ReturnData(outputData, (int)EnumResponseStatus.OK, (int)EnumResponseErrors.Success, EnumResponseErrors.Success.GetDisplayName()); 
     }
 }
