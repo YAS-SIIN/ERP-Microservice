@@ -4,15 +4,13 @@ using ERP.Domain.DTOs.Employee;
 using ERP.Domain.DTOs.Exceptions;
  
 using MediatR;
+ 
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+namespace ERP.Core.Queries.Employees;
 
-namespace ERP.Core.Queries.Employee;
-
+/// <summary>
+/// Get all employee view model
+/// </summary>
 public class GetAllEmployeeQuery : IRequest<ResultDto<IList<GetEmployeeResponse>>>
 {
 }

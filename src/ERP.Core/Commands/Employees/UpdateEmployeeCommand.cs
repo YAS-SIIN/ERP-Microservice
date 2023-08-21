@@ -1,21 +1,27 @@
-﻿using ERP.Domain.DTOs.Exceptions;
- 
+﻿
+using ERP.Domain.DTOs.Employee;
+using ERP.Domain.DTOs.Exceptions;
 
 using FluentValidation;
+  
 
 using MediatR;
+ 
 
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ERP.Core.Commands.Employee;
+namespace ERP.Core.Commands.Employees;
 
-public class CreateEmployeeCommand : IRequest<ResultDto<long>>
+/// <summary>
+/// Update employee view model
+/// </summary>
+public class UpdateEmployeeCommand : IRequest<ResultDto<GetEmployeeResponse>>
 {
+    /// <summary>
+    /// Employee Id
+    /// </summary> 
+    [DisplayName("شناسه یکتای پرسنل")]
+    public int Id { get; set; }
     [DisplayName("نام")]
     public string? FirstName { get; set; }
     [DisplayName("نام خانوادگی")]
@@ -34,24 +40,24 @@ public class CreateEmployeeCommand : IRequest<ResultDto<long>>
     public short Gender { get; set; }
     [DisplayName("تاریخ استخدام")]
     public string? HireDate { get; set; }
-    [DisplayName("تاریخ ترک کار")]
-    public string? LeaveDate { get; set; } = "";
     [DisplayName("شماره موبایل")]
     public string? MobileNo { get; set; }
     [DisplayName("مسیرعکس")]
     public string? ImaghePath { get; set; } = "";
 }
 
-
-public class CreateEmployeeCommandValidator : AbstractValidator<CreateEmployeeCommand>
+/// <summary>
+/// Check validation of employee input in update
+/// </summary>
+public class UpdateEmployeeCommandValidator : AbstractValidator<UpdateEmployeeCommand>
 {
-    public CreateEmployeeCommandValidator()
+    public UpdateEmployeeCommandValidator()
     {
 
         RuleFor(v => v.FirstName)
-            .NotEmpty().WithMessage("{PropertyName} را وارد نمایید.")
-            .MaximumLength(50).WithMessage("{PropertyName} نباید بیشتر از {MaxLength} کاراکتر باشد.")
-            .MinimumLength(3).WithMessage("{PropertyName} حداقل {MinLength} کاراکتر باشد.");
+           .NotEmpty().WithMessage("{PropertyName} را وارد نمایید.")
+           .MaximumLength(50).WithMessage("{PropertyName} نباید بیشتر از {MaxLength} کاراکتر باشد.")
+           .MinimumLength(3).WithMessage("{PropertyName} حداقل {MinLength} کاراکتر باشد.");
 
         RuleFor(v => v.LastName)
             .NotEmpty().WithMessage("{PropertyName} را وارد نمایید.")
@@ -64,12 +70,12 @@ public class CreateEmployeeCommandValidator : AbstractValidator<CreateEmployeeCo
             .NotEmpty().WithMessage("{PropertyName} را وارد نمایید.")
             .MaximumLength(50).WithMessage("{PropertyName} نباید بیشتر از {MaxLength} کاراکتر باشد.")
             .MinimumLength(3).WithMessage("{PropertyName} حداقل {MinLength} کاراکتر باشد.");
-              
+
         RuleFor(v => v.NationalCode)
             .NotEmpty().WithMessage("{PropertyName} را وارد نمایید.")
             .MaximumLength(10).WithMessage("{PropertyName} نباید بیشتر از {MaxLength} کاراکتر باشد.")
             .MinimumLength(10).WithMessage("{PropertyName} حداقل {MinLength} کاراکتر باشد.");
-                       
+
         RuleFor(v => v.IdentifyNo)
             .NotEmpty().WithMessage("{PropertyName} را وارد نمایید.")
             .MinimumLength(1).WithMessage("{PropertyName} حداقل {MinLength} کاراکتر باشد.");
@@ -78,15 +84,15 @@ public class CreateEmployeeCommandValidator : AbstractValidator<CreateEmployeeCo
             .NotEmpty().WithMessage("{PropertyName} را وارد نمایید.")
             .MaximumLength(10).WithMessage("{PropertyName} نباید بیشتر از {MaxLength} کاراکتر باشد.")
             .MinimumLength(10).WithMessage("{PropertyName} حداقل {MinLength} کاراکتر باشد.");
-                          
-        RuleFor(v => v.DateOfBirth)
+
+        RuleFor(v => v.HireDate)
             .NotEmpty().WithMessage("{PropertyName} را وارد نمایید.")
             .MaximumLength(10).WithMessage("{PropertyName} نباید بیشتر از {MaxLength} کاراکتر باشد.")
             .MinimumLength(10).WithMessage("{PropertyName} حداقل {MinLength} کاراکتر باشد.");
-                                  
+
         RuleFor(v => v.MobileNo)
             .NotEmpty().WithMessage("{PropertyName} را وارد نمایید.");
-        
+
     }
 
 }
