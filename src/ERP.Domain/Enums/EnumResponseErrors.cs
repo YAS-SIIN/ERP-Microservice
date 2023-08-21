@@ -31,7 +31,7 @@ public enum EnumResponseErrors : int
     [Display(Name = "اطلاعات مورد نظر قابل حذف نمی باشد.")]
     NotDelete = 107,
 
-    [Display(Name = "اطلاعاتی با موفقیت ثبت شد.")]
+    [Display(Name = "عملیات با موفقیت انجام شد.")]
     Success = 200,
      
     [Display(Name = "خطایی در انجام عملیات رخ داده است.")]

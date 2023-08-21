@@ -64,7 +64,7 @@ public class CreateEmployeeCommandValidator : AbstractValidator<CreateEmployeeCo
             .MaximumLength(50).WithMessage("{PropertyName} نباید بیشتر از {MaxLength} کاراکتر باشد.")
             .MinimumLength(3).WithMessage("{PropertyName} حداقل {MinLength} کاراکتر باشد.");
 
-        RuleFor(v => v.EmpoloyeeNo).Equal(0).WithMessage("{PropertyName} را وارد نمایید.");
+        RuleFor(v => v.EmpoloyeeNo).NotEqual(0).WithMessage("{PropertyName} را وارد نمایید.");
 
         RuleFor(v => v.FatherName)
             .NotEmpty().WithMessage("{PropertyName} را وارد نمایید.")
