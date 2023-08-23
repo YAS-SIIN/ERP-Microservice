@@ -30,11 +30,11 @@ public class GetAllEmployeeQueryHandler : IRequestHandler<GetAllEmployeeQuery, R
     {
         IList<GetEmployeeResponse> resData = Enumerable.Empty<GetEmployeeResponse>().ToList();
         var response = await _uw.GetRepository<Domain.Entities.ERP.Employees.Employee>(Domain.Enums.EnumDBContextType.READ_ERPDBContext).GetAllAsync(cancellationToken);
+ 
 
-        if (response is not Domain.Entities.ERP.Employees.Employee)
-            return ResultDto<IList<GetEmployeeResponse>>.ReturnData(resData, (int)EnumResponseStatus.OK, (int)EnumResponseErrors.Success, EnumResponseErrors.Success.GetDisplayName());
+        //     return ResultDto<IList<GetEmployeeResponse>>.ReturnData(resData, (int)EnumResponseStatus.OK, (int)EnumResponseErrors.Success, EnumResponseErrors.Success.GetDisplayName());
 
-        resData = Mapper<IList<GetEmployeeResponse>, IList<Domain.Entities.ERP.Employees.Employee>>.MappClasses(response.ToList());
+        resData = Mapper<IList<GetEmployeeResponse>, List<Domain.Entities.ERP.Employees.Employee>>.MappClasses(response.ToList());
 
         return ResultDto<IList<GetEmployeeResponse>>.ReturnData(resData, (int)EnumResponseStatus.OK, (int)EnumResponseErrors.Success, EnumResponseErrors.Success.GetDisplayName()); 
     }
