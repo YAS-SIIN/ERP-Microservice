@@ -10,17 +10,16 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["src/ERP.Presentation/APIBackend/ERP.Presentation.APIBackend.csproj", "src/ERP.Presentation/APIBackend/"]
-RUN dotnet restore "src/ERP.Presentation/APIBackend/ERP.Presentation.APIBackend.csproj"
+COPY ["src/ERP.Presentation/APIBackend2/ERP.Presentation.APIBackend2/ERP.Presentation.APIBackend2.csproj", "src/ERP.Presentation/APIBackend2/ERP.Presentation.APIBackend2/"]
+RUN dotnet restore "src/ERP.Presentation/APIBackend2/ERP.Presentation.APIBackend2/ERP.Presentation.APIBackend2.csproj"
 COPY . .
-WORKDIR "/src/ERP.Presentation.APIBackend"
-WORKDIR "/src/src/ERP.Presentation/APIBackend"
-RUN dotnet build "ERP.Presentation.APIBackend.csproj" -c Release -o /app/build
+WORKDIR "/src/ERP.Presentation/APIBackend2/ERP.Presentation.APIBackend2"
+RUN dotnet build "ERP.Presentation.APIBackend2.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "ERP.Presentation.APIBackend.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "ERP.Presentation.APIBackend2.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "ERP.Presentation.APIBackend.dll"]
+ENTRYPOINT ["dotnet", "ERP.Presentation.APIBackend2.dll"]

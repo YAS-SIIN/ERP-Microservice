@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ERP.IoC", "src\ERP.IoC\ERP.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ERP.Presentation.Shared", "src\ERP.Presentation\Shared\ERP.Presentation.Shared.csproj", "{8933EEAB-2FE7-4592-86A9-275BF334C60C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERP.Presentation.APIBackend2", "src\ERP.Presentation\APIBackend2\ERP.Presentation.APIBackend2\ERP.Presentation.APIBackend2.csproj", "{F85FE267-5174-4A32-8970-6F6624FF0F7C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{8933EEAB-2FE7-4592-86A9-275BF334C60C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8933EEAB-2FE7-4592-86A9-275BF334C60C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8933EEAB-2FE7-4592-86A9-275BF334C60C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F85FE267-5174-4A32-8970-6F6624FF0F7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F85FE267-5174-4A32-8970-6F6624FF0F7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F85FE267-5174-4A32-8970-6F6624FF0F7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F85FE267-5174-4A32-8970-6F6624FF0F7C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
