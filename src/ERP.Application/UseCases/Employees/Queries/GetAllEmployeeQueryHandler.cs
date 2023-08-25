@@ -1,19 +1,20 @@
 ﻿
 
 
-using ERP.Core.Queries.Employee;
+using ERP.Core.Queries.Employees;
 using ERP.Domain.DTOs.Employee;
 using ERP.Domain.DTOs.Exceptions;
 using ERP.Domain.Entities.ERP.Employees;
 using ERP.Domain.Interfaces.UnitOfWork;
 using ERP.Presentation.Shared.Mapper;
 
-using MabnaDBTest.Common.Enums;
+using ERP.Domain.Common.Enums;
 
 using MediatR;
+using ERP.Presentation.Shared.Tools;
+using System.Linq;
 
-
-namespace ERP.Application.Application.UseCases.Employees.Queries;
+namespace ERP.Application.UseCases.Employees.Queries;
 
 public class GetAllEmployeeQueryHandler : IRequestHandler<GetAllEmployeeQuery, ResultDto<IList<GetEmployeeResponse>>>
 {
@@ -26,10 +27,16 @@ public class GetAllEmployeeQueryHandler : IRequestHandler<GetAllEmployeeQuery, R
 
     public async Task<ResultDto<IList<GetEmployeeResponse>>> Handle(GetAllEmployeeQuery request,
         CancellationToken cancellationToken)
-    { 
-        var response = await _uw.GetRepository<Employee>(Domain.Enums.EnumDBContextType.READ_ERPDBContext).GetAllAsync(cancellationToken); 
-        var resData = Mapper<IList<GetEmployeeResponse>, IList<Employee>>.MappClasses(response.ToList());
-        return ResultDto<IList<GetEmployeeResponse>>.ReturnData(EnumResponses.Success, resData);
-    }
+    {
+        IList<GetEmployeeResponse> resData = Enumerable.Empty<GetEmployeeResponse>().ToList();
+        var response = await _uw.GetRepository<Domain.Entities.ERP.Employees.Employee>(Domain.Enums.EnumDBContextType.READ_ERPDBContext).GetAllAsync(cancellationToken);
  
+
+        //     return ResultDto<IList<GetEmployeeResponse>>.ReturnData(resData, (int)EnumResponseStatus.OK, (int)EnumResponseErrors.Success, EnumResponseErrors.Success.GetDisplayName());
+
+        resData = Mapper<IList<GetEmployeeResponse>, List<Domain.Entities.ERP.Employees.Employee>>.MappClasses(response.ToList());
+
+        return ResultDto<IList<GetEmployeeResponse>>.ReturnData(resData, (int)EnumResponseStatus.OK, (int)EnumResponseErrors.Success, EnumResponseErrors.Success.GetDisplayName()); 
+    }
+
 }

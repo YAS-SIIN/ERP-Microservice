@@ -1,4 +1,7 @@
-﻿using System;
+﻿using ERP.Domain.Common.Enums;
+using ERP.Presentation.Shared.Tools;
+
+using System;
 using System.Diagnostics;
 using System.Runtime.Serialization;
 using System.Xml.Linq;
@@ -21,7 +24,7 @@ public class ErrorException : Exception
 
     public ErrorException(int errorCode, string errorDescription, string traceId = "", string errorDetail="")
     {
-        ErrorCode = errorCode;
+        ErrorCode = (int)errorCode;
         ErrorDescription = errorDescription;
         ErrorDetail = errorDetail;
         TraceId = traceId;

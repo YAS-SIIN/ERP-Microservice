@@ -1,8 +1,11 @@
 ﻿
+using ERP.Domain.Common.Enums;
 using ERP.Domain.DTOs;
 using ERP.Domain.DTOs.Exceptions;
 using ERP.Presentation.Shared.Exceptions;
+using ERP.Presentation.Shared.Mapper;
 
+using System.Collections;
 using System.Text.Json;
 
 namespace ERP.Presentation.APIBackend.Middlewares
@@ -37,20 +40,8 @@ namespace ERP.Presentation.APIBackend.Middlewares
                 errors = GetErrors(exception);
             }
             catch (Exception) { }
-            try
-            {
-                errorException = (ErrorException)exception;
-            } catch (Exception) {}
-
-            ErrorDto response = new ErrorDto
-            {
-                StatusCode = statusCode,
-                ErrorDescription = errorException.ErrorDescription,
-                ErrorDetail = errorException.Message,
-                ErrorCode = errorException.ErrorCode,
-                Errors = errors
-            };
-            var errorData = ResultDto<ErrorDto>.ReturnData(statusCode, response);
+          
+            var errorData = ResultDto<ErrorDto>.ReturnData(null, statusCode, (int)EnumResponseErrors.Error, exception?.InnerException?.Message, exception.Message, errors);
 
             httpContext.Response.ContentType = "application/json";
 

@@ -6,7 +6,7 @@ public class GetEmployeeResponse
     public long Id { get; set; }
     public string? FirstName { get; set; }
     public string? LastName { get; set; }
-    public int EmpoloyeeNo { get; set; } = 0;
+    public int EmployeeNo { get; set; } = 0;
     public string? FatherName { get; set; }
     public string? NationalCode { get; set; }
     public string? IdentifyNo { get; set; }
@@ -15,5 +15,6 @@ public class GetEmployeeResponse
     public string? HireDate { get; set; }
     public string? LeaveDate { get; set; } = "";
     public string? MobileNo { get; set; }
-    public string? ImaghePath { get; set; } = "";
+    public string? ImagePath { get; set; } = "";
+     
 }
