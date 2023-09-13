@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{DF645F1D-C121-4389-974A-18E0B4DB9BEF}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ERP.Presentation.APIBackend", "src\ERP.Presentation\APIBackend\ERP.Presentation.APIBackend.csproj", "{1B9A8051-6D61-4DAF-8428-D83BEB966242}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ERP.Application", "src\ERP.Application\ERP.Application.csproj", "{27F3D14E-162C-46E4-BAC9-638FFF8054EC}"
@@ -19,7 +17,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ERP.IoC", "src\ERP.IoC\ERP.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ERP.Presentation.Shared", "src\ERP.Presentation\Shared\ERP.Presentation.Shared.csproj", "{8933EEAB-2FE7-4592-86A9-275BF334C60C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERP.Presentation.APIBackend2", "src\ERP.Presentation\APIBackend2\ERP.Presentation.APIBackend2\ERP.Presentation.APIBackend2.csproj", "{F85FE267-5174-4A32-8970-6F6624FF0F7C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{58844762-DBF2-43D4-A5C9-BEBC92577661}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ERP.Infra", "ERP.Infra", "{AFB53368-EE3A-4EF1-AC98-2D41E841F1D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERP.Infra.Messaging", "src\ERP.Infra\Messaging\ERP.Infra.Messaging.csproj", "{6A3C9935-1128-4BD7-BE6F-366288B10161}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,15 +57,19 @@ Global
 		{8933EEAB-2FE7-4592-86A9-275BF334C60C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8933EEAB-2FE7-4592-86A9-275BF334C60C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8933EEAB-2FE7-4592-86A9-275BF334C60C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F85FE267-5174-4A32-8970-6F6624FF0F7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F85FE267-5174-4A32-8970-6F6624FF0F7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F85FE267-5174-4A32-8970-6F6624FF0F7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F85FE267-5174-4A32-8970-6F6624FF0F7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A3C9935-1128-4BD7-BE6F-366288B10161}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A3C9935-1128-4BD7-BE6F-366288B10161}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A3C9935-1128-4BD7-BE6F-366288B10161}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A3C9935-1128-4BD7-BE6F-366288B10161}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {05F8D2D3-5509-494E-88A1-12A0857059E3}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AFB53368-EE3A-4EF1-AC98-2D41E841F1D3} = {58844762-DBF2-43D4-A5C9-BEBC92577661}
+		{6A3C9935-1128-4BD7-BE6F-366288B10161} = {AFB53368-EE3A-4EF1-AC98-2D41E841F1D3}
 	EndGlobalSection
 EndGlobal

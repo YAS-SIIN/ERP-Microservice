@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ERP.Application\ERP.Application.csproj" />
     <ProjectReference Include="..\ERP.Infra\Data\ERP.Infra.Data.csproj" />
+    <ProjectReference Include="..\ERP.Infra\Messaging\ERP.Infra.Messaging.csproj" />
   </ItemGroup>
 
 </Project>

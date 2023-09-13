@@ -22,10 +22,10 @@ public class EmployeeController : BaseApiController
     /// </summary>
     /// <returns>Result</returns>
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAll(CancellationToken cancellationToke)
     {
         var query = new GetAllEmployeeQuery();
-        return OkData(await Mediator.Send(query));
+        return OkData(await Mediator.Send(query, cancellationToke));
     }
 
     /// <summary>
@@ -33,9 +33,9 @@ public class EmployeeController : BaseApiController
     /// </summary>
     /// <returns>Result</returns>
     [HttpGet("{Id}")]
-    public async Task<IActionResult> Get([FromRoute] GetEmployeeQuery query)
+    public async Task<IActionResult> Get([FromRoute] GetEmployeeQuery query, CancellationToken cancellationToken)
     {
-        return OkData(await Mediator.Send(query));
+        return OkData(await Mediator.Send(query, cancellationToken));
     }
 
     /// <summary>
@@ -44,9 +44,9 @@ public class EmployeeController : BaseApiController
     /// <param name="command"></param>
     /// <returns>Result</returns>
     [HttpPost]
-    public async Task<IActionResult> Create(CreateEmployeeCommand command)
+    public async Task<IActionResult> Create(CreateEmployeeCommand command, CancellationToken cancellationToken)
     {
-        return OkData(await Mediator.Send(command));
+        return OkData(await Mediator.Send(command, cancellationToken));
     }
 
     /// <summary>
@@ -55,9 +55,9 @@ public class EmployeeController : BaseApiController
     /// <param name="command"></param>
     /// <returns>Result</returns>
     [HttpPut]
-    public async Task<IActionResult> Update(UpdateEmployeeCommand command)
+    public async Task<IActionResult> Update(UpdateEmployeeCommand command, CancellationToken cancellationToken)
     {
-        return OkData(await Mediator.Send(command));
+        return OkData(await Mediator.Send(command, cancellationToken));
     }
 
     /// <summary>
@@ -65,9 +65,9 @@ public class EmployeeController : BaseApiController
     /// </summary>
     /// <returns>Result</returns>
     [HttpDelete("{Id}")]
-    public async Task<IActionResult> Delete([FromRoute] DeleteEmployeeCommand command)
+    public async Task<IActionResult> Delete([FromRoute] DeleteEmployeeCommand command, CancellationToken cancellationToken)
     {
 
-        return OkData(await Mediator.Send(command));
+        return OkData(await Mediator.Send(command, cancellationToken));
     }
 }

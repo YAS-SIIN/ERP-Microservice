@@ -14,6 +14,7 @@ using FluentValidation.Validators;
 using FluentValidation;
 
 using System.Reflection;
+using ERP.Infra.Messaging;
 
 namespace ERP.IoC;
 
@@ -26,6 +27,7 @@ public static class ServerConfiguration
         services.AddDbContext<WRITE_ERPDBContext>(options => options.UseSqlServer(configuration["ApplicationOptions:WRITE_ERPConnectionString"]));
        
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddScoped<IBus, Bus>();
         services.AddScoped<CoreDBContextInjection>();
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ERP.Application.InjectApplication).GetTypeInfo().Assembly));
         services.AddValidatorsFromAssembly(typeof(ERP.Core.InjectCore).GetTypeInfo().Assembly);
@@ -33,5 +35,4 @@ public static class ServerConfiguration
         services.AddScoped(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehavior<,>));
         services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
     }
-
 }

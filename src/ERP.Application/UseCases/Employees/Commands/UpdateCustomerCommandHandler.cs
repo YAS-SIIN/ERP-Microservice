@@ -8,15 +8,19 @@ using ERP.Core.Commands.Employees;
 using ERP.Domain.DTOs.Employee;
 using ERP.Presentation.Shared.Mapper;
 using ERP.Presentation.Shared.Tools;
+using ERP.Infra.Messaging;
+using System.Text.Json;
 
 namespace ERP.Application.UseCases.Employee.Commands;
 
 public class UpdateEmployeeCommandHandler : IRequestHandler<UpdateEmployeeCommand, ResultDto<GetEmployeeResponse>>
 {
     private readonly IUnitOfWork _uw;
-    public UpdateEmployeeCommandHandler(IUnitOfWork uw)
+    private readonly IBus _bus;
+    public UpdateEmployeeCommandHandler(IUnitOfWork uw, IBus bus)
     {
         _uw = uw;
+        _bus = bus;
     }
 
     public async Task<ResultDto<GetEmployeeResponse>> Handle(UpdateEmployeeCommand request, CancellationToken cancellationToken)
@@ -32,6 +36,7 @@ public class UpdateEmployeeCommandHandler : IRequestHandler<UpdateEmployeeComman
 
         GetEmployeeResponse outputData = Mapper<GetEmployeeResponse, Domain.Entities.ERP.Employees.Employee>.MappClasses(inputData);
 
+        _bus.Publish($"Update_Created : {JsonSerializer.Serialize(request)}");
         return ResultDto<GetEmployeeResponse>.ReturnData(outputData, (int)EnumResponseStatus.OK, (int)EnumResponseErrors.Success, EnumResponseErrors.Success.GetDisplayName()); 
     }
 }
