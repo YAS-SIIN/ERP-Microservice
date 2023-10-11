@@ -9,6 +9,9 @@ public class MAIN_ERPDBContext : ERPDbContext
     public MAIN_ERPDBContext(DbContextOptions<MAIN_ERPDBContext> options) : base(options)
     {
     }
+    public MAIN_ERPDBContext()
+    {
+    }
 }
 
 public class READ_ERPDBContext : ERPDbContext

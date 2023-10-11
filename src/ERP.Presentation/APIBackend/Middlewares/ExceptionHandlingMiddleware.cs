@@ -1,11 +1,8 @@
 ﻿
 using ERP.Domain.Common.Enums;
-using ERP.Domain.DTOs;
-using ERP.Domain.DTOs;
-using ERP.Presentation.Shared.Exceptions;
-using ERP.Presentation.Shared.Mapper;
-
-using System.Collections;
+using ERP.Domain.DTOs; 
+using ERP.Domain.DTOs.Exceptions;
+using ERP.Presentation.Shared.Exceptions;  
 using System.Text.Json;
 
 namespace ERP.Presentation.APIBackend.Middlewares

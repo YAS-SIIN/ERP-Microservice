@@ -9,6 +9,11 @@ public class ERPDbContext : DbContext
     public ERPDbContext(DbContextOptions options) : base(options)
     {
     }
+    
+    public ERPDbContext()
+    {
+    }
+
     #region Employee    
     public DbSet<Employee> EMPEmployees { get; set; }
     #endregion
@@ -16,19 +21,19 @@ public class ERPDbContext : DbContext
     #region Account    
     public DbSet<User> Users { get; set; }
     #endregion
-               
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {       
+    {
         #region Employee 
         new EmployeeEntityTypeConfiguration().Configure(modelBuilder.Entity<Employee>());
         modelBuilder.Entity<Employee>().ToTable("Employee", schema: "EMP");
-        #endregion 
+        #endregion
 
         #region User 
         new UserEntityTypeConfiguration().Configure(modelBuilder.Entity<User>());
         modelBuilder.Entity<User>().ToTable("User", schema: "Acc");
-        #endregion 
-  
+        #endregion
+
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ERPDbContext).Assembly); base.OnModelCreating(modelBuilder);
     }
 
@@ -51,7 +56,7 @@ public class ERPDbContext : DbContext
         }
 
         return base.SaveChanges();
-    }       
+    }
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken)
     {

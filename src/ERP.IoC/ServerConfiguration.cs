@@ -24,13 +24,13 @@ public static class ServerConfiguration
     private static readonly InMemoryDatabaseRoot inMemoryDatabaseRoot = new InMemoryDatabaseRoot();
     public static void Register(this IServiceCollection services, IConfiguration configuration)
     {
-        // services.AddDbContext<MAIN_ERPDBContext>(options => options.UseSqlServer(configuration["ApplicationOptions:MAIN_ERPConnectionString"]));
-        // services.AddDbContext<READ_ERPDBContext>(options => options.UseSqlServer(configuration["ApplicationOptions:READ_ERPConnectionString"]));
-        // services.AddDbContext<WRITE_ERPDBContext>(options => options.UseSqlServer(configuration["ApplicationOptions:WRITE_ERPConnectionString"]));
+        services.AddDbContext<MAIN_ERPDBContext>(options => options.UseSqlServer(configuration["ApplicationOptions:MAIN_ERPConnectionString"]));
+        services.AddDbContext<READ_ERPDBContext>(options => options.UseSqlServer(configuration["ApplicationOptions:READ_ERPConnectionString"]));
+        services.AddDbContext<WRITE_ERPDBContext>(options => options.UseSqlServer(configuration["ApplicationOptions:WRITE_ERPConnectionString"]));
 
-        services.AddDbContext<MAIN_ERPDBContext>(options => options.UseInMemoryDatabase("ERPDbContext", inMemoryDatabaseRoot));
-        services.AddDbContext<READ_ERPDBContext>(options => options.UseInMemoryDatabase("ERPDbContext", inMemoryDatabaseRoot));
-        services.AddDbContext<WRITE_ERPDBContext>(options => options.UseInMemoryDatabase("ERPDbContext", inMemoryDatabaseRoot));
+        // services.AddDbContext<MAIN_ERPDBContext>(options => options.UseInMemoryDatabase("ERPDbContext", inMemoryDatabaseRoot));
+        // services.AddDbContext<READ_ERPDBContext>(options => options.UseInMemoryDatabase("ERPDbContext", inMemoryDatabaseRoot));
+        // services.AddDbContext<WRITE_ERPDBContext>(options => options.UseInMemoryDatabase("ERPDbContext", inMemoryDatabaseRoot));
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IBus, Bus>();
