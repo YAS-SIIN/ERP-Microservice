@@ -1,4 +1,5 @@
-﻿using ERP.Domain.Entities.ERP.Employees;
+﻿using ERP.Domain.Entities.ERP.Accounts;
+using ERP.Domain.Entities.ERP.Employees;
 using Microsoft.EntityFrameworkCore;
 
 namespace ERP.Infra.Data.Context;
@@ -11,23 +12,23 @@ public class ERPDbContext : DbContext
     #region Employee    
     public DbSet<Employee> EMPEmployees { get; set; }
     #endregion
+
+    #region Account    
+    public DbSet<User> Users { get; set; }
+    #endregion
                
     protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        //var mutableProperties = modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetProperties().Where(p => p.Name == "Status"));
-                 
+    {       
         #region Employee 
         new EmployeeEntityTypeConfiguration().Configure(modelBuilder.Entity<Employee>());
-        #endregion
-        modelBuilder.Entity<Employee>().ToTable("Employee", schema: "EMP").Property(x => x.Id).UseHiLo("EMPEmployee_Hilo");
-       
-        //foreach (var mutableEntityType in modelBuilder.Model.GetEntityTypes())
-        //{
-        //    mutableEntityType.SetQueryFilter(filterExpr);
-        //}
-        //foreach (var property in mutableProperties)
-        //    property. = "varchar(100)";
+        modelBuilder.Entity<Employee>().ToTable("Employee", schema: "EMP");
+        #endregion 
 
+        #region User 
+        new UserEntityTypeConfiguration().Configure(modelBuilder.Entity<User>());
+        modelBuilder.Entity<User>().ToTable("User", schema: "Acc");
+        #endregion 
+  
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ERPDbContext).Assembly); base.OnModelCreating(modelBuilder);
     }
 

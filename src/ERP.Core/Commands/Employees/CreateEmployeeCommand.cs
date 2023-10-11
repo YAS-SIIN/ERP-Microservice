@@ -1,6 +1,5 @@
-﻿using ERP.Domain.DTOs.Exceptions;
- 
-
+﻿using ERP.Domain.DTOs;
+using ERP.Domain.Enums;
 using FluentValidation;
 
 using MediatR;
@@ -17,30 +16,38 @@ namespace ERP.Core.Commands.Employees;
 /// <summary>
 /// Create employee view model
 /// </summary>
-public class CreateEmployeeCommand : IRequest<ResultDto<long>>
+public class CreateEmployeeCommand : IRequest<ResultDto<int>>
 {
     [DisplayName("نام")]
     public string? FirstName { get; set; }
+
     [DisplayName("نام خانوادگی")]
     public string? LastName { get; set; }
-    [DisplayName("کد پرسنلی")]
-    public int EmpoloyeeNo { get; set; } = 0;
+
     [DisplayName("نام پدر")]
     public string? FatherName { get; set; }
+
     [DisplayName("کد ملی")]
     public string? NationalCode { get; set; }
+
     [DisplayName("شماره شناسنامه")]
     public string? IdentifyNo { get; set; }
+
     [DisplayName("تاریخ تولد")]
     public string? DateOfBirth { get; set; }
+
     [DisplayName("جنسیت")]
-    public short Gender { get; set; }
+    public EnumGender Gender { get; set; } 
+
     [DisplayName("تاریخ استخدام")]
     public string? HireDate { get; set; }
+    
     [DisplayName("تاریخ ترک کار")]
     public string? LeaveDate { get; set; } = "";
+    
     [DisplayName("شماره موبایل")]
     public string? MobileNo { get; set; }
+    
     [DisplayName("مسیرعکس")]
     public string? ImaghePath { get; set; } = "";
 }
@@ -63,8 +70,6 @@ public class CreateEmployeeCommandValidator : AbstractValidator<CreateEmployeeCo
             .NotEmpty().WithMessage("{PropertyName} را وارد نمایید.")
             .MaximumLength(50).WithMessage("{PropertyName} نباید بیشتر از {MaxLength} کاراکتر باشد.")
             .MinimumLength(3).WithMessage("{PropertyName} حداقل {MinLength} کاراکتر باشد.");
-
-        RuleFor(v => v.EmpoloyeeNo).NotEqual(0).WithMessage("{PropertyName} را وارد نمایید.");
 
         RuleFor(v => v.FatherName)
             .NotEmpty().WithMessage("{PropertyName} را وارد نمایید.")

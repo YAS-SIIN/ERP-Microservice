@@ -1,10 +1,4 @@
-﻿using ERP.Domain.Common.Enums;
-using ERP.Presentation.Shared.Tools;
-
-using System;
-using System.Diagnostics;
-using System.Runtime.Serialization;
-using System.Xml.Linq;
+﻿using System.Runtime.Serialization;
 
 namespace ERP.Domain.DTOs.Exceptions;
 
@@ -24,7 +18,7 @@ public class ErrorException : Exception
 
     public ErrorException(int errorCode, string errorDescription, string traceId = "", string errorDetail="")
     {
-        ErrorCode = (int)errorCode;
+        ErrorCode = errorCode;
         ErrorDescription = errorDescription;
         ErrorDetail = errorDetail;
         TraceId = traceId;

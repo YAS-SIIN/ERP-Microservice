@@ -1,8 +1,6 @@
 ﻿
-using ERP.Domain.Common.Enums;
-namespace ERP.Domain.DTOs.Exceptions;
-
-
+namespace ERP.Domain.DTOs;
+ 
 public class ResultDto<T>
 {
     public T? Data { get; set; }
@@ -26,5 +24,8 @@ public class ResultDto<T>
         };
     }
 
-      
+    public static ResultDto<int> ReturnData(int employeeNo, int oK, int success, object value)
+    {
+        throw new NotImplementedException();
+    }
 }

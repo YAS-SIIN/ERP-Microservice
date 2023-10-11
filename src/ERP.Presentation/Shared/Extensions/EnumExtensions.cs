@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ERP.Presentation.Shared.Tools;
+namespace ERP.Presentation.Shared.Extensions;
 
 public static class EnumExtensions
 {

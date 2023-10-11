@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ERP.Domain.Enums;
 
-public enum EnumSessionStatus
+public enum EnumSessionStatus : short
 {
 
     [Display(Name = "Logout")]

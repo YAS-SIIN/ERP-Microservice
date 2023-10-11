@@ -1,18 +1,15 @@
 ﻿
 using ERP.Core.Queries.Employees;
 using ERP.Domain.DTOs.Employee;
-using ERP.Domain.DTOs.Exceptions;
+using ERP.Domain.DTOs;
 using ERP.Domain.Entities.ERP.Employees;
 using ERP.Domain.Enums;
 using ERP.Domain.Interfaces.UnitOfWork;
 using ERP.Presentation.Shared.Mapper;
-
 using ERP.Domain.Common.Enums;
-
 using MediatR;
-
-using Microsoft.EntityFrameworkCore;
-using ERP.Presentation.Shared.Tools;
+using ERP.Presentation.Shared.Extensions;
+using ERP.Presentation.Shared.Exceptions;
 
 namespace ERP.Application.Application.UseCases.Customers.Queries;
 
@@ -31,8 +28,8 @@ public class GetEmployeeQueryHandler : IRequestHandler<GetEmployeeQuery, ResultD
 
         var response = await _uw.GetRepository<Employee>(EnumDBContextType.READ_ERPDBContext).GetByIdAsync(request.Id, cancellationToken); 
 
-        if (response is not Employee)
-            throw new ErrorException((int)EnumResponseErrors.NotFound, EnumResponseErrors.NotFound.GetDisplayName());
+        if (response is not Employee) throw new NotFoundException(EnumResponseErrors.NotFound.GetDisplayName());
+            //throw new ErrorException((int)EnumResponseErrors.NotFound, EnumResponseErrors.NotFound.GetDisplayName());
 
         GetEmployeeResponse resData = Mapper<GetEmployeeResponse, Employee>.MappClasses(response);
 

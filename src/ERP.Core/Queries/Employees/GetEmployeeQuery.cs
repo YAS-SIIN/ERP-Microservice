@@ -1,7 +1,7 @@
 ﻿
 
 using ERP.Domain.DTOs.Employee;
-using ERP.Domain.DTOs.Exceptions;
+using ERP.Domain.DTOs;
 
 using MediatR;
 
@@ -23,5 +23,5 @@ public class GetEmployeeQuery : IRequest<ResultDto<GetEmployeeResponse>>
     /// Employee Id
     /// </summary>
     [DisplayName("شناسه یکتای پرسنل")]
-    public long Id { get; set; }
+    public int Id { get; set; }
 }

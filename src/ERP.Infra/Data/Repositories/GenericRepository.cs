@@ -40,16 +40,6 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         }
     }
 
-    public bool ExistData()
-    {
-        return _dbSet.Any();
-    }
-
-    public bool ExistData(Expression<Func<T, bool>> predicate)
-    {
-        return _dbSet.Where(predicate).Any();
-    }
-
     public IQueryable<T> GetAll()
     {
         return _dbSet;
@@ -111,18 +101,18 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         if (save) SaveChanges();
     }
 
+    public bool ExistData()
+    {
+        return _dbSet.Any();
+    }
 
+    public bool ExistData(Expression<Func<T, bool>> predicate)
+    {
+        return _dbSet.Where(predicate).Any();
+    }
+ 
     //--------------
     #region Async Methods
-
-    public async Task<bool> ExistDataAsync(CancellationToken cancellationToken)
-    {
-        return await _dbSet.AnyAsync(cancellationToken);
-    }
-    public async Task<bool> ExistDataAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken)
-    {
-        return await _dbSet.Where(predicate).AnyAsync(cancellationToken);
-    }
 
     public async Task<IQueryable<T>> GetAllAsync(CancellationToken cancellationToken)
     {
@@ -155,6 +145,16 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         await _dbSet.AddRangeAsync(entityList, cancellationToken);
         if (save) await SaveChangesAsync(cancellationToken);
+    }
+
+    public async Task<bool> ExistDataAsync(CancellationToken cancellationToken)
+    {
+        return await _dbSet.AnyAsync(cancellationToken);
+    }
+
+    public async Task<bool> ExistDataAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken)
+    {
+        return await _dbSet.Where(predicate).AnyAsync(cancellationToken);
     }
 
     #endregion

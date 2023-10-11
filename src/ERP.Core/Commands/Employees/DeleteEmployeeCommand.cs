@@ -1,5 +1,5 @@
 ﻿
-using ERP.Domain.DTOs.Exceptions;
+using ERP.Domain.DTOs;
 
 using FluentValidation;
 
@@ -12,13 +12,13 @@ namespace ERP.Core.Commands.Employees;
 /// <summary>
 /// Delete employee view model
 /// </summary>
-public class DeleteEmployeeCommand : IRequest<ResultDto<long>>
+public class DeleteEmployeeCommand : IRequest<ResultDto<int>>
 {
     /// <summary>
     /// Employee Id
     /// </summary> 
     [DisplayName("شناسه یکتای پرسنل")]
-    public long Id { get; set; }
+    public int Id { get; set; }
      
 }
 

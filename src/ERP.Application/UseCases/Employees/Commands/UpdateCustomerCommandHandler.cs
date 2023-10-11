@@ -2,14 +2,15 @@
 using MediatR;
 using ERP.Domain.Enums;
 using ERP.Domain.Common.Enums;
-using ERP.Domain.DTOs.Exceptions;
+using ERP.Domain.DTOs;
 using ERP.Domain.Interfaces.UnitOfWork;
 using ERP.Core.Commands.Employees;
 using ERP.Domain.DTOs.Employee;
 using ERP.Presentation.Shared.Mapper;
-using ERP.Presentation.Shared.Tools;
+using ERP.Presentation.Shared.Extensions;
 using ERP.Infra.Messaging;
 using System.Text.Json;
+using ERP.Presentation.Shared.Exceptions;
 
 namespace ERP.Application.UseCases.Employee.Commands;
 
@@ -27,8 +28,8 @@ public class UpdateEmployeeCommandHandler : IRequestHandler<UpdateEmployeeComman
     {
         var inputData = await _uw.GetRepository<Domain.Entities.ERP.Employees.Employee>(EnumDBContextType.WRITE_ERPDBContext).GetByIdAsync((object)request.Id, cancellationToken);
 
-        if (inputData is null && inputData is not Domain.Entities.ERP.Employees.Employee)
-            throw new ErrorException((int)EnumResponseErrors.NotFound, EnumResponseErrors.NotFound.GetDisplayName());
+        if (inputData is null && inputData is not Domain.Entities.ERP.Employees.Employee) throw new NotFoundException(EnumResponseErrors.NotFound.GetDisplayName());
+            //throw new ErrorException((int)EnumResponseErrors.NotFound, EnumResponseErrors.NotFound.GetDisplayName());
 
         inputData = Mapper<Domain.Entities.ERP.Employees.Employee, UpdateEmployeeCommand>.MappClasses(request);
          

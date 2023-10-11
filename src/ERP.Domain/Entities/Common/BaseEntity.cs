@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Reflection.Emit;
 using System.Linq.Expressions;            
 using System.ComponentModel.DataAnnotations;
+using ERP.Domain.Enums;
 
 namespace ERP.Domain.Entities.Common;
 
@@ -16,7 +17,7 @@ public abstract class BaseEntity<TKey>
     public TKey? Id { get; set; }
 
     [Required]
-    public short Status { get; set; }
+    public EnumBaseStatus Status { get; set; }
 
     [Required]
     public DateTime CreateDateTime { get; set; }

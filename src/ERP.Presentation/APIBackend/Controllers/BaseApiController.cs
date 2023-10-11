@@ -1,6 +1,6 @@
 ﻿
 
-using ERP.Domain.DTOs.Exceptions;
+using ERP.Domain.DTOs;
 
 using MediatR;
 

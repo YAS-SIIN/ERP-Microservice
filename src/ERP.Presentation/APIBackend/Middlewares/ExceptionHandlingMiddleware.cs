@@ -1,7 +1,7 @@
 ﻿
 using ERP.Domain.Common.Enums;
 using ERP.Domain.DTOs;
-using ERP.Domain.DTOs.Exceptions;
+using ERP.Domain.DTOs;
 using ERP.Presentation.Shared.Exceptions;
 using ERP.Presentation.Shared.Mapper;
 
@@ -54,6 +54,7 @@ namespace ERP.Presentation.APIBackend.Middlewares
             exception switch
             { 
                 NotFoundException => StatusCodes.Status404NotFound,
+                ApplicationException => StatusCodes.Status400BadRequest,
                 ValidationException => StatusCodes.Status400BadRequest,
                 ErrorException => StatusCodes.Status400BadRequest,
                 _ => StatusCodes.Status500InternalServerError
