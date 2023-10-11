@@ -1,16 +1,10 @@
-﻿
-
-using ERP.Domain.Enums;
+﻿using ERP.Domain.Enums;
 using ERP.Domain.Interfaces.Repositories;
-using ERP.Infra.Data.Context;
 using ERP.Infra.Data.CoreContext;
-
 using Microsoft.EntityFrameworkCore;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
+
+using static Dapper.SqlMapper;
 
 namespace ERP.Infra.Data.Repositories;
 
@@ -57,7 +51,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
 
     public T Get(Expression<Func<T, bool>> predicate)
     {
-        return _dbSet.Where(predicate).FirstOrDefault();
+        return _dbSet.FirstOrDefault(predicate);
     }
 
     public virtual void Add(T entity, bool save = false)
@@ -110,7 +104,11 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         return _dbSet.Where(predicate).Any();
     }
- 
+
+    public object GetMax(Expression<Func<T, object>> columnSelector)
+    {
+        return _dbSet.Max<T, object>(columnSelector) ?? 0;
+    }
     //--------------
     #region Async Methods
 
@@ -119,6 +117,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         var data = await _dbSet.ToListAsync(cancellationToken);
         return data.AsQueryable();
     }
+
     public async Task<IQueryable<T>> GetAllAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken)
     {
         var data = await _dbSet.Where(predicate).ToListAsync(cancellationToken);
@@ -132,7 +131,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
 
     public async Task<T> GetAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken)
     {
-        return await _dbSet.Where(predicate).FirstOrDefaultAsync(cancellationToken);
+        return await _dbSet.FirstOrDefaultAsync(predicate, cancellationToken);
     }
 
     public async virtual Task AddAsync(T entity, CancellationToken cancellationToken, bool save = false)
@@ -157,6 +156,11 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         return await _dbSet.Where(predicate).AnyAsync(cancellationToken);
     }
 
+    public async Task<int?> GetMaxAsync(Expression<Func<T, int?>> columnSelector, CancellationToken cancellationToken)
+    {
+        return await _dbSet.MaxAsync<T, int?>(columnSelector, cancellationToken) ?? 0;
+    }
+
     #endregion
     /// <summary>
     /// Save and commit changes in database
@@ -167,7 +171,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         {
             _context._write_ERPDBContext.SaveChanges();
         }
-        catch {}
+        catch { }
     }
 
     /// <summary>
@@ -179,7 +183,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         {
             await _context._write_ERPDBContext.SaveChangesAsync(cancellationToken);
         }
-        catch {}
+        catch { }
     }
 
 }

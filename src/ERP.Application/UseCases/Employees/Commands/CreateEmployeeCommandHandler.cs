@@ -27,7 +27,8 @@ public class CreateEmployeeCommandHandler : IRequestHandler<CreateEmployeeComman
     public async Task<ResultDto<int>> Handle(CreateEmployeeCommand request, CancellationToken cancellationToken)
     {
         Domain.Entities.ERP.Employees.Employee inputData = Mapper<Domain.Entities.ERP.Employees.Employee, CreateEmployeeCommand>.MappClasses(request);
-        inputData.EmployeeNo = _uw.GetRepository<Domain.Entities.ERP.Employees.Employee>(EnumDBContextType.WRITE_ERPDBContext).GetAllAsync(cancellationToken).Result.Max(x => x.EmployeeNo) + 1;
+        inputData.EmployeeNo = Convert.ToInt32(_uw.GetRepository<Domain.Entities.ERP.Employees.Employee>(EnumDBContextType.WRITE_ERPDBContext).GetMaxAsync(x=> x.EmployeeNo, cancellationToken)) + 1;
+
         inputData.EmployeeNo = inputData.EmployeeNo == 0 || inputData.EmployeeNo == 1 ? 10001 : inputData.EmployeeNo;
         inputData.Status = (short)EnumBaseStatus.Deactive;
 

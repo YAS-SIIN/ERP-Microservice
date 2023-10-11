@@ -53,6 +53,8 @@ namespace ERP.Presentation.APIBackend.Middlewares
                 NotFoundException => StatusCodes.Status404NotFound,
                 ApplicationException => StatusCodes.Status400BadRequest,
                 ValidationException => StatusCodes.Status400BadRequest,
+                ArgumentException => StatusCodes.Status415UnsupportedMediaType,
+                ForbiddenAccessException => StatusCodes.Status403Forbidden,
                 ErrorException => StatusCodes.Status400BadRequest,
                 _ => StatusCodes.Status500InternalServerError
             };

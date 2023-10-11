@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
 namespace ERP.Domain.Interfaces.Repositories;
 
@@ -18,9 +15,9 @@ public interface IGenericRepository<T> where T : class
     void UpdateRange(List<T> entity, bool save = false);
     void Delete(T entity, bool save = false);
     void DeleteRange(List<T> entity, bool save = false);
-    
-    bool ExistData();
+        bool ExistData();
     bool ExistData(Expression<Func<T, bool>> predicate);
+    object GetMax(Expression<Func<T, object>> columnSelector);
     //--------
 
     Task<IQueryable<T>> GetAllAsync(CancellationToken cancellationToken);
@@ -31,7 +28,8 @@ public interface IGenericRepository<T> where T : class
     Task AddRangeAsync(List<T> entityList, CancellationToken cancellationToken, bool save = false);
     Task<bool> ExistDataAsync(CancellationToken cancellationToken);
     Task<bool> ExistDataAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken);
-    
+    Task<int?> GetMaxAsync(Expression<Func<T, int?>> columnSelector, CancellationToken cancellationToken);
+
     void SaveChanges();
     Task SaveChangesAsync(CancellationToken cancellationToken);
 

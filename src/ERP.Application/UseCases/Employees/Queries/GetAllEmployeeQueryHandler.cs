@@ -31,7 +31,7 @@ public class GetAllEmployeeQueryHandler : IRequestHandler<GetAllEmployeeQuery, R
 
         //     return ResultDto<IList<GetEmployeeResponse>>.ReturnData(resData, (int)EnumResponseStatus.OK, (int)EnumResponseErrors.Success, EnumResponseErrors.Success.GetDisplayName());
  
-        resData = Mapper<List<GetEmployeeResponse>, List<Domain.Entities.ERP.Employees.Employee>>.MappClasses(response.ToList());
+        resData = Mapper<GetEmployeeResponse, Domain.Entities.ERP.Employees.Employee>.MapList(response.ToList());
 
         return ResultDto<IList<GetEmployeeResponse>>.ReturnData(resData, (int)EnumResponseStatus.OK, (int)EnumResponseErrors.Success, EnumResponseErrors.Success.GetDisplayName());
     }
